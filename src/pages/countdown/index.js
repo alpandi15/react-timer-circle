@@ -1,34 +1,47 @@
-import React from 'react'
-import CountDown from 'react-countdown'
+import React, { useState } from 'react'
+import CountDown, { zeroPad } from 'react-countdown'
 import { getTimeDiff } from '../../utils/time'
 
 import Timers from './timer'
 
-const Completionist = () => <span>Resend Code!</span>;
-
-const renderer = ({ hours, minutes, seconds, completed }) => {
-  if (completed) {
-    return <Completionist />;
-  } else {
-    return <span>{minutes}:{seconds}</span>;
-  }
-}
 
 const Timer = () => {
-  const create = new Date('2020-01-20 11:08:00').getTime()
-  const expired = new Date('2020-01-20 11:30:20').getTime()
+  const [timeNow, setTimeNow] = useState(Date.now())
+  // const create = new Date('2020-01-20 11:52:00').getTime()
+  const expired = new Date('2020-01-21 16:46:20').getTime()
   let expiredTime = 0
-  if (Date.now() >= create && Date.now() < expired) {
-    expiredTime = (getTimeDiff(create, expired) * 1000)
+  if (timeNow < expired) {
+    expiredTime = (getTimeDiff(timeNow, expired) * 1000)
   }
-  console.log (expiredTime)
+  console.log(expiredTime)
+  const Completionist = () => {
+    return (
+      <button onClick={() => setTimeNow(Date.now() + (10 * 1000))}>Resend Code!</button>
+    )
+  };
+  
+  const renderer = ({ hours, minutes, seconds, completed }) => {
+    // const setDigit = (val) => {
+    //   if (val.toString().length <= 1) {
+    //     return "0" + val.toString();
+    //   }
+    //   return val.toString();
+    // }
+
+    if (completed) {
+      return <Completionist />;
+    } else {
+      return <span>{zeroPad(minutes)}:{zeroPad(seconds)}</span>;
+    }
+  }
+
   return (
     <div>
-      Timer
       <CountDown
-        date={Date.now() + expiredTime}
+        date={timeNow + expiredTime}
+        renderer={renderer}
       />
-      <Timers timeTillDate="2020-01-20 10:42:00" timeFormat="YYYY-MM-DD H:mm:ss" />
+      {/* <Timers timeTillDate="2020-01-20 10:42:00" timeFormat="YYYY-MM-DD H:mm:ss" /> */}
     </div>
   )
 }

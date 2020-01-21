@@ -20,7 +20,7 @@ class Countdown extends React.Component {
 			const minutes = countdown.format('mm');
 			const seconds = countdown.format('ss');
 
-      this.setState({ days, hours, minutes, seconds });
+      		this.setState({ days, hours, minutes, seconds });
 		}, 1000);
 	}
 
