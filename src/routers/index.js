@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
 import Countdown from '../pages/countdown'
+import Countdown2 from '../pages/countdown-test'
 import Home from '../pages/home'
 
 const router = () => {
@@ -10,6 +11,7 @@ const router = () => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/countdown" component={Countdown} />
+        <Route exact path="/countdown-test" component={Countdown2} />
       </Switch>
     </BrowserRouter>
   )

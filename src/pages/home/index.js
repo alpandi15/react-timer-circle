@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default () =>{
   const [difference, setDifference] = React.useState(0);
@@ -55,6 +56,11 @@ export default () =>{
         {start ? 'Stop' : 'Start'}
         </button>
       </div>
+      <ul>
+        <li><Link to="/countdown">Countdown</Link></li>
+        <li><Link to="/countdown-test">Countdown Test</Link></li>
+      </ul>
+
     </>
   )
 }
