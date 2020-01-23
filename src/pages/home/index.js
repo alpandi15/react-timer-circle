@@ -1,66 +1,36 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next';
+import i18next from 'i18next';
 
-export default () =>{
-  const [difference, setDifference] = React.useState(0);
-  const [intervalID, setIntervalID] = React.useState(null)
-  const [start, setStart] = React.useState(true)
+const Index = () => {
+  const { t } = useTranslation();
 
-  const [stopDate] = React.useState(Math.trunc(new Date('2020-01-21 15:24:00').getTime() / 1000))
-  
-  let timeNow = Math.trunc(new Date().getTime() / 1000);
-
-  const setDigit = (val) => {
-    if (val.toString().length <= 1) {
-      return "0" + val.toString();
-    }
-    return val.toString();
+  function handleClick(lang) {
+    i18next.changeLanguage(lang)
   }
-  
-  let i = 1;
-  const IntervalCount = () => {
-  }
-  React.useEffect( () => {
-    let timer = null
-    if (difference > 0) {
-      timer = setTimeout(()=> {
-        var tmpStartDate = timeNow + i;
-        setDifference(stopDate - tmpStartDate);
-        i++;
-      }, 1000);
-    }
-    if (!start || difference < 0){
-      clearInterval(timer)
-    }
-    // console.log('Diff ', difference)
-    // console.log('Interval ', interval)
-
-    // return () => {
-    //   if (difference <= 0) {
-    //     console.log('Berhenti ', difference)
-    //     clearTimeout(interval)
-    //   }
-    // }
-
-  },[difference, i, start, stopDate, timeNow])
-
-
-  return(
+  return (
     <>
-      <div style={{margin: '2rem', fontSize: '3rem'}}>
-        {setDigit(Math.trunc(difference / 60 / 60 / 24))} : {setDigit(Math.trunc(difference / 60 / 60) % 24)} : {setDigit(Math.trunc(difference / 60) % 60)} : {setDigit(Math.trunc(difference) % 60)}
-      </div>
-      { difference <= 0 ? 'Resend Code' : 'Waiting..'}
-      <div>
-        <button onClick={() => setStart(!start)}>
-        {start ? 'Stop' : 'Start'}
+      <nav style={{ width: '100%', padding: '2rem 0', backgroundColor:'gray' }}>
+        <button onClick={()=>handleClick('en')} >
+          English
         </button>
+        <button onClick={()=>handleClick('ko')} >
+          Korean
+        </button>
+        <button onClick={()=>handleClick('chi')} >
+          Chinese
+      </button>
+      </nav>
+      <div>
+        <ul>
+          <li><Link to="/countdown">{t('Thanks.1')}</Link></li>
+          <li><Link to="/countdown-test2">Countdown 2</Link></li>
+          <li><Link to="/countdown-test">Countdown Test</Link></li>
+        </ul>
       </div>
-      <ul>
-        <li><Link to="/countdown">Countdown</Link></li>
-        <li><Link to="/countdown-test">Countdown Test</Link></li>
-      </ul>
-
     </>
   )
 }
+
+export default Index
