@@ -61,6 +61,7 @@ const Paginate = () => {
                 pageNeighbours={1}
                 onPageChanged={onPageChanged}
                 location={1}
+                startPage={1}
               />
             </div>
           )
