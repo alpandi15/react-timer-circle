@@ -8,17 +8,20 @@ const Paginate = () => {
     currentData: [],
     currentPage: null,
     totalPages: null,
-    totalData: 0
+    totalData: 0,
+    limitPage: 2
   })
   
   const onPageChanged = async (data) => {
+    const { limitPage } = state
     const { currentPage, totalPages } = data;
 
     const res = await request({
       method: 'get',
       url: 'my-team/all',
       data: {
-        page: currentPage
+        page: currentPage,
+        pageSize: limitPage || 1
       },
       auth: true
     })
@@ -38,7 +41,7 @@ const Paginate = () => {
       const res = await request({
         method: 'get',
         url: 'my-team/all',
-        auth: true
+        auth: true  
       })
       if (res.success) {
         setState({
@@ -71,7 +74,7 @@ const Paginate = () => {
             <div className="d-flex flex-row py-4 align-items-center">
               <Pagination
                 totalRecords={state && state.totalData}
-                pageLimit={10}
+                pageLimit={state.limitPage || 1}
                 pageNeighbours={1}
                 onPageChanged={onPageChanged}
                 location={1}
