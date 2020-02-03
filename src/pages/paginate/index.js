@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import QueryString from 'query-string'
 import Countries from "countries-api/lib/data/Countries.json";
 import "./style.css";
 
@@ -74,6 +75,7 @@ class App extends Component {
             pageLimit={10}
             pageNeighbours={1}
             onPageChanged={this.onPageChanged}
+            location={QueryString.parse(this.props.location.search) || 1}
           />
         </div>
       </div>

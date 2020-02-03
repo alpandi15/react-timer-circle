@@ -28,6 +28,7 @@ const Index = () => {
           <li><Link to="/countdown-test2">Countdown 2</Link></li>
           <li><Link to="/countdown-test">Countdown Test</Link></li>
           <li><Link to="/paginate">Pagination</Link></li>
+          <li><Link to="/paginate2">Pagination2</Link></li>
         </ul>
       </div>
     </>
