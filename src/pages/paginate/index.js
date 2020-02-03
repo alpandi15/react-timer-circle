@@ -73,7 +73,7 @@ class App extends Component {
           <Pagination
             totalRecords={totalCountries}
             pageLimit={10}
-            pageNeighbours={1}
+            pageNeighbours={2}
             onPageChanged={this.onPageChanged}
             location={QueryString.parse(this.props.location.search) || 1}
           />
