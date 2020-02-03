@@ -46,7 +46,7 @@ const Paginate = () => {
           background: '#d8d8d8',
           padding: '10px'
         }}>
-          <div>{value.name}</div>
+          <div>{value.name}</div>``
         </div>
         )
       })

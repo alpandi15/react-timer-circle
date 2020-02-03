@@ -36,7 +36,7 @@ class Pagination extends Component {
 
   componentDidMount() {
     const { startPage } = this.props
-    console.log('Query ', this.props.location.page)
+    console.log('Query ', this.props)
     this.gotoPage(startPage);
   }
 
