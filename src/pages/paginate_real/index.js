@@ -8,8 +8,8 @@ const Paginate = () => {
     currentData: [],
     currentPage: null,
     totalPages: null,
-    totalData: 0,
-    limitPage: 2
+    totalData: 200,
+    limitPage: 1
   })
   
   const onPageChanged = async (data) => {
@@ -31,29 +31,12 @@ const Paginate = () => {
       setState({
         currentPage,
         currentData,
-        totalPages
+        totalPages,
+        totalData: res.meta.total
       })
     }
   }
 
-  React.useEffect(() => {
-    const fetch = async () => {
-      const res = await request({
-        method: 'get',
-        url: 'my-team/all',
-        auth: true  
-      })
-      if (res.success) {
-        setState({
-          listData: res.data,
-          totalData: res.meta.total
-        })
-      }
-    }
-  
-    fetch()
-  }, [])
-  
   return (
     <div>
       {state && state.currentData ? state.currentData.map((value, key) => {
