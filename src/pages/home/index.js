@@ -30,6 +30,7 @@ const Index = () => {
           <li><Link to="/paginate">Pagination</Link></li>
           <li><Link to="/paginate2">Pagination2</Link></li>
           <li><Link to="/team">Team</Link></li>
+          <li><Link to="/url_paginate">Pagination with URL</Link></li>
         </ul>
       </div>
     </>
