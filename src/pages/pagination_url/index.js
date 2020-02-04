@@ -43,6 +43,7 @@ const Paginate = (props) => {
     const target = `/url_paginate?page=${currentPage}`
 
     setState({
+        ...state,
         currentPage
       })
 
