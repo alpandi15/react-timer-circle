@@ -17,11 +17,18 @@ const Paginate = () => {
       const res = await request({
         method: 'get',
         url: 'my-team/all',
+        data: {
+          page: 1,
+          pageSize: 1
+        },
         auth: true
       })
 
       if (res.success) {
         setState({
+          currentPage: res.meta.page,
+          currentData: res.data,
+          totalPages: res.meta.total,
           totalData: res.meta.total
         })
       }
