@@ -132,6 +132,7 @@ class Pagination extends Component {
                 return (
                   <li key={index} className="page-item">
                     <div
+                      style={{ cursor: 'pointer' }}
                       className="page-link"
                       href="#"
                       aria-label="Previous"
@@ -147,6 +148,7 @@ class Pagination extends Component {
                 return (
                   <li key={index} className="page-item">
                     <div
+                      style={{ cursor: 'pointer' }}
                       className="page-link"
                       href="#"
                       aria-label="Next"
@@ -166,6 +168,7 @@ class Pagination extends Component {
                   }`}
                 >
                   <div
+                    style={{ cursor: 'pointer' }}
                     className="page-link"
                     href="#"
                     onClick={e => this.handleClick(page, e)}
