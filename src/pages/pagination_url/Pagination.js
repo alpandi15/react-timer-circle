@@ -35,7 +35,10 @@ class Pagination extends Component {
   }
 
   componentDidMount() {
-    // const { startPage } = this.props
+    const { startPage } = this.props
+    this.setState({
+      currentPage: startPage
+    })
     // console.log('Query ', this.props)
     // this.gotoPage(startPage);
   }

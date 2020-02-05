@@ -8,7 +8,7 @@ const Paginate = (props) => {
     listData: [],
     currentData: [],
     currentPage: qParams.parse(props.location.search).page || 1,
-    totalPages: null,
+    totalPages: 0,
     totalData: 0,
     limitPage: 1
   })
@@ -27,9 +27,9 @@ const Paginate = (props) => {
 
       if (res.success) {
         setState({
-          currentPage: res.meta.page,
+          currentPage: parseInt(res.meta.page),
           currentData: res.data,
-          totalPages: res.meta.total,
+          totalPages: res.meta.lastPage,
           totalData: res.meta.total
         })
       }
@@ -67,15 +67,15 @@ const Paginate = (props) => {
       })
       : null}
       <div>
-        { state && state.totalData !== 0 ? 
+        { state && state.totalPages !== 0 ? 
           (
             <div className="d-flex flex-row py-4 align-items-center">
               <Pagination
-                totalRecords={state && state.totalData}
+                totalRecords={state.totalPages}
                 pageLimit={state.limitPage || 1}
                 pageNeighbours={2}
                 onPageChanged={onPageChanged}
-                startPage={1}
+                startPage={state.currentPage}
               />
             </div>
           )
