@@ -5,12 +5,15 @@ import { request } from '../../services/request'
 
 const Paginate = (props) => {
   const [state, setState] = React.useState({
-    listData: [],
     currentData: [],
     currentPage: qParams.parse(props.location.search).page || 1,
     totalPages: 0,
     totalData: 0,
-    limitPage: 1
+    limitPage: 1,
+    meta: {
+      q: null,
+      type: null
+    }
   })
 
   React.useEffect(() => {
@@ -43,9 +46,9 @@ const Paginate = (props) => {
     const target = `/url_paginate?page=${currentPage}`
 
     setState({
-        ...state,
-        currentPage
-      })
+      ...state,
+      currentPage
+    })
 
     props.history.push({
         pathname: target,

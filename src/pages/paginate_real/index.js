@@ -6,8 +6,8 @@ const Paginate = () => {
   const [state, setState] = React.useState({
     listData: [],
     currentData: [],
-    currentPage: null,
-    totalPages: null,
+    currentPage: 0,
+    totalPages: 0,
     totalData: 0,
     limitPage: 1
   })
@@ -28,7 +28,7 @@ const Paginate = () => {
         setState({
           currentPage: res.meta.page,
           currentData: res.data,
-          totalPages: res.meta.total,
+          totalPages: res.meta.lastPage,
           totalData: res.meta.total
         })
       }
@@ -77,11 +77,11 @@ const Paginate = () => {
       })
       : null}
       <div>
-        { state && state.totalData !== 0 ? 
+        { state && state.totalPages !== 0 ? 
           (
             <div className="d-flex flex-row py-4 align-items-center">
               <Pagination
-                totalRecords={state && state.totalData}
+                totalRecords={state && state.totalPages}
                 pageLimit={state.limitPage || 1}
                 pageNeighbours={2}
                 onPageChanged={onPageChanged}
