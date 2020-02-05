@@ -11,10 +11,11 @@ const Paginate = (props) => {
     totalData: 0,
     limitPage: 1,
     meta: {
-      q: null,
+      q: qParams.parse(props.location.search).q || null,
       type: null
     }
   })
+
 
   React.useEffect(() => {
     const fetch = async () => {
@@ -22,22 +23,25 @@ const Paginate = (props) => {
         method: 'get',
         url: 'my-team/all',
         data: {
-          page: state.currentPage,
+          ...state.meta,
+          page: parseInt(state.currentPage),
           pageSize: 2
         },
         auth: true
       })
-
+  
       if (res.success) {
         setState({
           currentPage: parseInt(res.meta.page),
           currentData: res.data,
           totalPages: res.meta.lastPage,
-          totalData: res.meta.total
+          totalData: res.meta.total,
+          meta: {
+            q: state.meta && state.meta.q
+          }
         })
       }
     }
-
     fetch()
   }, [state.currentPage])
   
@@ -51,12 +55,48 @@ const Paginate = (props) => {
     })
 
     props.history.push({
-        pathname: target,
+      pathname: target,
     });
+  }
+
+  const onChangeSearch = (evt) => {
+    setState({
+      ...state,
+      meta: {
+        ...state.meta,
+        q: evt.target.value
+      }
+    })
+  }
+
+  const Search = async (data) => {
+    setState({
+      ...state,
+      currentPage: state.currentPage,
+      meta: {
+        ...data
+      }
+    })
+
+    const target = `/url_paginate?page=${state.currentPage}&q=${data.q}`
+    props.history.push({
+      pathname: target,
+    });
+  }
+
+  const keyDownInput = async (evt) => {
+    if (evt.key === 'Enter') {
+      Search(state.meta)
+    }
   }
 
   return (
     <div>
+      <div className="row">
+        <div className="col-md-6">
+          <input type="text" value={state.meta && state.meta.q} onChange={onChangeSearch} onKeyDown={keyDownInput} />
+        </div>
+      </div>
       {state && state.currentData ? state.currentData.map((value, key) => {
         return (
         <div key={key} style={{
