@@ -9,6 +9,7 @@ import Paginate2 from '../pages/paginate2'
 import Home from '../pages/home'
 import PaginationApi from '../pages/paginate_real'
 import PaginationUrl from '../pages/pagination_url'
+import Select from '../pages/select'
 
 const router = () => {
   return (
@@ -22,6 +23,7 @@ const router = () => {
         <Route exact path="/paginate2" component={Paginate2} />
         <Route exact path="/team" component={PaginationApi} />
         <Route exact path="/url_paginate*" component={PaginationUrl} />
+        <Route exact path="/select" component={Select} />
       </Switch>
     </BrowserRouter>
   )
