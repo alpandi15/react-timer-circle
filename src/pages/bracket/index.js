@@ -83,8 +83,8 @@ class Test extends React.PureComponent {
   constructor (props) {
     super(props)
     this.state = {
-      match: 4,
-      round: 3
+      match: 8,
+      round: 4
     }
   }
   componentDidMount () {
@@ -150,16 +150,54 @@ class Test extends React.PureComponent {
   connector () {
     let c = []
     const { match } = this.state
-    for(let i = 0; i <= match; i++) {
-      if (i === 1 || i%4 === 1) {
-        c.push(
-          GConnector({
-            x: 0,
-            y: 27*(Math.pow(3, i)),
-            index: i,
-            d: "M 228 53 L 236 53 L 236 1 L 244 1"
-          })
-        )
+    let PCount = match * 2
+    for(let i=0; i<PCount; i++){
+      const underE = i===PCount-1 && PCount === 8
+      if(PCount<=8) {
+        if(i === 0 || underE){
+          i = underE? i+1 : i
+          const a = (i+1) * 27
+          const b = (i+3) * 27
+          console.log(a,b)
+          c.push(
+            GConnector({
+              x: 0,
+              y: a,
+              index: i,
+              d: "M 228 1 L 236 1 L 236 54"
+            })
+          )
+          c.push(
+            GConnector({
+              x: 0,
+              y: b,
+              index: i,
+              d: "M 228 53 L 236 53 L 236 1 L 244 1"
+            })
+          )
+        }
+      } else {
+        if (i === 0 || (i+1)%4 === 1){
+          const a = (i+1) * 27
+          const b = (i+2) * 27
+          console.log(a,b)
+          c.push(
+            GConnector({
+              x: 0,
+              y: a,
+              index: i,
+              d: "M 228 1 L 236 1 L 236 54"
+            })
+          )
+          c.push(
+            GConnector({
+              x: 0,
+              y: b,
+              index: i,
+              d: "M 228 53 L 236 53 L 236 1 L 244 1"
+            })
+          )
+        }
       }
     }
     return c
