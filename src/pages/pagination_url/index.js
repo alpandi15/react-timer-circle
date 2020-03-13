@@ -21,13 +21,12 @@ const Paginate = (props) => {
     const fetch = async () => {
       const res = await request({
         method: 'get',
-        url: 'my-team/all',
+        url: 'team',
         data: {
           ...state.meta,
           page: parseInt(state.currentPage),
           pageSize: 2
-        },
-        auth: true
+        }
       })
   
       if (res.success) {

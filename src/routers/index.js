@@ -10,6 +10,7 @@ import Home from '../pages/home'
 import PaginationApi from '../pages/paginate_real'
 import PaginationUrl from '../pages/pagination_url'
 import Select from '../pages/select'
+import Bracket from '../pages/bracket'
 
 const router = () => {
   return (
@@ -24,6 +25,7 @@ const router = () => {
         <Route exact path="/team" component={PaginationApi} />
         <Route exact path="/url_paginate*" component={PaginationUrl} />
         <Route exact path="/select" component={Select} />
+        <Route exact path="/bracket" component={Bracket} />
       </Switch>
     </BrowserRouter>
   )

@@ -34,6 +34,13 @@ const Select = () => {
     return bottomBorder < scrollTop;
   };
 
+  const [text, setText] = React.useState(null)
+
+  const onGenerate = () => {
+    const result = text.split('\n')
+    console.log(result)
+  }
+
   return (
     <div>
       <SelectAsync
@@ -47,6 +54,9 @@ const Select = () => {
         noOptionsMessage={() => NoDataMessage() }
         isMulti
       />
+
+      <textarea wrap="hard" rows={5} name="team" onChange={(text) => setText(text.target.value)}></textarea>
+      <button onClick={onGenerate}>Generate</button>
     </div>
   )
 }

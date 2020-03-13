@@ -16,12 +16,12 @@ const Paginate = () => {
     const fetch = async () => {
       const res = await request({
         method: 'get',
-        url: 'my-team/all',
+        url: 'team',
         data: {
           page: 1,
           pageSize: 1
         },
-        auth: true
+        auth: false
       })
 
       if (res.success) {
@@ -43,14 +43,14 @@ const Paginate = () => {
 
     const res = await request({
       method: 'get',
-      url: 'my-team/all',
+      url: 'team',
       data: {
         page: currentPage,
         pageSize: limitPage || 1
       },
       auth: true
     })
-    
+    console.log('Response ', res)
     if (res.success) {
       const currentData = res.data;
       setState({
@@ -77,6 +77,7 @@ const Paginate = () => {
       })
       : null}
       <div>
+        Data Team
         { state && state.totalPages !== 0 ? 
           (
             <div className="d-flex flex-row py-4 align-items-center">
