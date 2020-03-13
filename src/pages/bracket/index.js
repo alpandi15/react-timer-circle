@@ -83,8 +83,8 @@ class Test extends React.PureComponent {
   constructor (props) {
     super(props)
     this.state = {
-      match: 8,
-      round: 4
+      match: 16,
+      round: 5
     }
   }
   componentDidMount () {
@@ -93,56 +93,84 @@ class Test extends React.PureComponent {
 
   bracket () {
     let g = []
-    const { match } = this.state
-    for(let i = 0; i < match; i++) {
-      g.push(
-        GBracket({
-          x: 0,
-          y: (i*108),
-          match: i+1,
-          index: i
-        })
-      )
-    }
+    let X = 244
+    let Y = 54
+    const { match, round } = this.state
 
-    for(let i = 0; i < match*2; i++) {
-      if (i === 1 || i%4 === 1) {
-        g.push(
-          GBracket({
-            x: 244,
-            y: (54*(i)),
-            match: i+1,
-            index: i
-          })
-        )
+    for (let r = 0; r < round; r++) {
+      for(let i = r; i < (match * 2) - r; i++) {
+        if (i % 2 === 1) {
+          g.push(
+            GBracket({
+              x: (r*X),
+              y: (i*Y),
+              match: i+1,
+              index: i
+            })
+          )
+        }
+        if (i % 2 === 0) {
+          g.push(
+            GBracket({
+              x: (r*X),
+              y: (i*Y),
+              match: i+1,
+              index: i
+            })
+          )
+        }
       }
     }
 
-    for(let i = 0; i < match*2; i++) {
-      if (i === 3 || i%8 === 3) {
-        g.push(
-          GBracket({
-            x: 488,
-            y: (54*(i)),
-            match: i+1,
-            index: i
-          })
-        )
-      }
-    }
+    // for(let i = 0; i < match; i++) {
+    //   g.push(
+    //     GBracket({
+    //       x: 0,
+    //       y: (i*108),
+    //       match: i+1,
+    //       index: i
+    //     })
+    //   )
+    // }
 
-    for(let i = 0; i < match*2; i++) {
-      if (i === 7) {
-        g.push(
-          GBracket({
-            x: 732,
-            y: (54*(i)),
-            match: i+1,
-            index: i
-          })
-        )
-      }
-    }
+    // for(let i = 0; i < match*2; i++) {
+    //   if (i === 1 || i%4 === 1) {
+    //     g.push(
+    //       GBracket({
+    //         x: 244,
+    //         y: (i*54),
+    //         match: i+1,
+    //         index: i
+    //       })
+    //     )
+    //   }
+    // }
+
+    // for(let i = 0; i < match*2; i++) {
+    //   if (i === 3 || i%8 === 3) {
+    //     g.push(
+    //       GBracket({
+    //         x: 488,
+    //         y: (i*54),
+    //         match: i+1,
+    //         index: i
+    //       })
+    //     )
+    //   }
+    // }
+
+    // for(let i = 0; i < match*2; i++) {
+    //   if (i === 7) {
+    //     g.push(
+    //       GBracket({
+    //         x: 732,
+    //         y: (54*(i)),
+    //         match: i+1,
+    //         index: i
+    //       })
+    //     )
+    //   }
+    // }
 
     return g
   }
@@ -152,7 +180,7 @@ class Test extends React.PureComponent {
     const { match } = this.state
     let PCount = match * 2
     for(let i=0; i<PCount; i++){
-      const underE = i===PCount-1 && PCount === 8
+      const underE = i=== PCount-1 && PCount === 8
       if(PCount<=8) {
         if(i === 0 || underE){
           i = underE? i+1 : i
@@ -210,7 +238,7 @@ class Test extends React.PureComponent {
         <svg className="bracket-svg" width={round*244} height={match*108} viewBox={`-0 0 ${round*244} ${match*108}`}>
           <g className="parent">
             <g>
-              {this.connector()}
+              {/* {this.connector()} */}
               {/* <g transform="translate(244 81)" className="bracket-line-container">
                 <path d="M 228 1 L 236 1 L 236 108" className="bracket-line" data-line-length="122" />
               </g>
