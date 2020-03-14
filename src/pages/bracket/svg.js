@@ -81,11 +81,11 @@ const GConnector = ({
 const Bracket = ({
     data
 }) => {
-    let g = []
-    let X = 244
-    let Y = 54
     const maxRound = data && data.match ? Number(data.match.p) : 0
     const player = data && data.match ? Number(data.match.numPlayers) : 0
+    let g = []
+    let X = 244
+    let Y = player <= 8 ? 54 : 54*0.5
     // const maxRound = Math.log2(player)
     console.log('Bracket ', maxRound, player)
     let arr = []
@@ -155,6 +155,8 @@ const Connector = ({
     const player = data && data.match ? Number(data.match.numPlayers) : 0
     // const maxRound = Math.log2(player)
 
+    let Y = player <= 8 ? 27 : 27*0.5
+
     let c = []
     let arrC = []
     for(let r = 0, length2 = maxRound; r < length2; r++){
@@ -166,8 +168,8 @@ const Connector = ({
             if(i === 0 || underE){
               i = underE? i+1 : i
               const adder = 3
-              const a = ((i + adder)*27)
-              const b = ((i+ 2 + adder)*27)
+              const a = ((i + adder)*Y)
+              const b = ((i+ 2 + adder)*Y)
               arrC[r].push(a,b)
               c.push(
                 GConnector({
@@ -189,8 +191,8 @@ const Connector = ({
           } else {
             if (i === 0 || (i+1)%4 === 1){
               const adder = 3
-              const a = ((i*2 + adder)*27)
-              const b = ((i*2+ 2 + adder)*27)
+              const a = ((i*2 + adder)*Y)
+              const b = ((i*2+ 2 + adder)*Y)
               arrC[r].push(a,b)
               c.push(
                 GConnector({
@@ -217,8 +219,8 @@ const Connector = ({
           arrC[r+1] = []
           for(var i = 0, length3 = arrC[r].length/2; i < length3; i++){
             const data = arrC[r]
-            const hasil = (data[i]*2)-27
-            const pathHasil = Math.pow(2, r) * 108
+            const hasil = (data[i]*2)-Y
+            const pathHasil = Math.pow(2, r) * (4*Y)
             if (i%2===0) {
               arrC[r+1].push(hasil)
               c.push(
