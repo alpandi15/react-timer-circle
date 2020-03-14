@@ -11,6 +11,7 @@ import PaginationApi from '../pages/paginate_real'
 import PaginationUrl from '../pages/pagination_url'
 import Select from '../pages/select'
 import Bracket from '../pages/bracket'
+import Bracket2 from '../pages/bracket/test2'
 
 const router = () => {
   return (
@@ -26,6 +27,7 @@ const router = () => {
         <Route exact path="/url_paginate*" component={PaginationUrl} />
         <Route exact path="/select" component={Select} />
         <Route exact path="/bracket" component={Bracket} />
+        <Route exact path="/bracket2" component={Bracket2} />
       </Switch>
     </BrowserRouter>
   )
