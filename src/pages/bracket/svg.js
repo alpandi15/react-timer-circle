@@ -259,10 +259,11 @@ class Test extends React.PureComponent {
     const { data } = this.props
     const round = data && data.match ? Number(data.match.p) : 0
     const player = data && data.match ? Number(data.match.numPlayers) : 0
+    const height = player <= 8 ? 54 : (54*0.55)
     // const round = Math.log2(player)
     console.log('DATAAAAAAA ', data)
     return (
-        <svg className="bracket-svg" width={round*244} height={player*108} viewBox={`-0 0 ${round*244} ${player*108}`}>
+        <svg className="bracket-svg" width={round*244} height={player*parseInt(height)} viewBox={`0 0 ${round*244} ${player*parseInt(height)}`}>
           <g className="parent">
             <Connector data={data} />
             <Bracket data={data} />
