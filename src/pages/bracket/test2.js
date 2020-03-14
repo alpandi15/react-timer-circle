@@ -100,9 +100,10 @@ class Test extends React.PureComponent {
     let g = []
     let dataBracket = data.winnerBracket.Winner
     const keys =  Object.keys(dataBracket)
-    console.log('DATA ', dataBracket[keys[0]])
+    console.log('DATA ', dataBracket)
+    console.log('INDEX ', keys.indexOf('Round 1'))
     const { player, round } = this.state
-
+    let loop = 0;
     for (let r = 0; r < round; r++) {
       for(let i = 0; i < dataBracket[keys[r]].length; i++) {
         g.push(
@@ -114,6 +115,8 @@ class Test extends React.PureComponent {
           })
         )
       }
+      console.log('Loop ', loop)
+      loop += 1
     }
 
     return g
