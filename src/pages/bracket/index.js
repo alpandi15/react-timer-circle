@@ -83,7 +83,7 @@ class Test extends React.PureComponent {
   constructor (props) {
     super(props)
     this.state = {
-      match: 128,
+      match: 16,
     }
   }
   componentDidMount () {
@@ -214,75 +214,35 @@ class Test extends React.PureComponent {
           }
         }
       }
-      if (arrC[r].length && r+1 < maxRound) {
-        arrC[r+1] = []
-        // console.log('r', r)
-        for(var i = 0, length3 = arrC[r].length; i < length3; i++){
-          const data = arrC[r]
-          if ((i%4===1 || i%4===0) && r === 0) {
-            const adder = i%4===0 ? 27 : 54
-            const hasil = data[i]+adder
-            let a, b
-            if (i%4===0) {
-              a = hasil+27
-             // console.log('A', (r+1)*244,a, i, hasil)
-             c.push(
-               GConnector({
-                 x: (r+1)*244,
-                 y: a,
-                 index: `${(r+1)*244}${a}`,
-                 d: `M 228 1 L 236 1 L 236 ${54+((r+1) * 54)}`
-               })
-             )
-            } else {
-              b = hasil+54
-               // console.log('B', (r+1)*244,b, i, hasil)
-               c.push(
-                 GConnector({
-                   x: (r+1)*244,
-                   y: b,
-                   index: `${(r+1)*244}${b}`,
-                   d: `M 228 ${53+((r+1) * 54)} L 236 ${53+((r+1) * 54)} L 236 1 L 244 1`
-                 })
-               )
-            }
-            arrC[r+1].push(hasil)
-          }
-          // samakan aja pola nya, dgn yg bracket utk dpatin nilai nya
-          if ( r >= 1) {
-            if (i< length3/2) {
-            const hasil = data[i]*2
-            // console.log(i, hasil/27, hasil, i%2===0)
-            arrC[r+1].push(hasil)
-             let a, b
-             if (i%2===0) {
-               a = hasil+27
-              // console.log('A', (r+1)*244,a, i, hasil)
+      if (r+2 < maxRound) {
+        if (arrC[r].length) {
+          arrC[r+1] = []
+          for(var i = 0, length3 = arrC[r].length/2; i < length3; i++){
+            const data = arrC[r]
+            const hasil = (data[i]*2)-27
+            const pathHasil = Math.pow(2, r) * 108
+            if (i%2===0) {
+              arrC[r+1].push(hasil)
               c.push(
                 GConnector({
                   x: (r+1)*244,
-                  y: a,
-                  index: `${(r+1)*244}${a}`,
-                  d: `M 228 1 L 236 1 L 236 ${54+((r+1) * 54)+54}`
+                  y: hasil,
+                  index: `${(r+1)*244}${hasil}`,
+                  d: `M 228 1 L 236 1 L 236 ${pathHasil}`
                 })
               )
-             } else {
-              const rPlus = r+1
-              const adder = r % 2 ===1 ? r*3 : (r*2)+1
-               b = hasil + (adder*27)
-              console.log('rPlus', r, adder, hasil, b)
-                // console.log('B', rPlus*244,b, i, hasil)
-                c.push(
-                  GConnector({
-                    x: rPlus*244,
-                    y: b,
-                    index: `${rPlus*244}${b}`,
-                    d: `M 228 ${53+(rPlus * 54)+54} L 236 ${53+(rPlus * 54)+54} L 236 1 L 244 1`
-                  })
-                )
-             }
-           // console.log('datax', (r+1)*244,hasil)
-          }
+            }
+            if (i%2===1) {
+              arrC[r+1].push(hasil)
+              c.push(
+                GConnector({
+                  x: (r+1)*244,
+                  y: hasil,
+                  index: `${(r+1)*244}${hasil}`,
+                  d: `M 228 ${pathHasil-1} L 236 ${pathHasil-1} L 236 1 L 244 1`
+                })
+              )
+            }
           }
         }
       }
