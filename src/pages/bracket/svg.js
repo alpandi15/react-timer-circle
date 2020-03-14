@@ -79,14 +79,15 @@ const GConnector = ({
 }
 
 const Bracket = ({
-    player,
     data
 }) => {
-    console.log('Data Bracket ', data)
     let g = []
     let X = 244
     let Y = 54
-    const maxRound = Math.log2(player)
+    const maxRound = data && data.match ? Number(data.match.p) : 0
+    const player = data && data.match ? Number(data.match.numPlayers) : 0
+    // const maxRound = Math.log2(player)
+    console.log('Bracket ', maxRound, player)
     let arr = []
     for(let i=0; i< maxRound; i++){
       if(i===0){
@@ -147,13 +148,15 @@ const Bracket = ({
 }
 
 const Connector = ({
-    player,
     data
 }) => {
     console.log('Data Connector ', data)
+    const maxRound = data && data.match ? Number(data.match.p) : 0
+    const player = data && data.match ? Number(data.match.numPlayers) : 0
+    // const maxRound = Math.log2(player)
+
     let c = []
     let arrC = []
-    const maxRound = Math.log2(player)
     for(let r = 0, length2 = maxRound; r < length2; r++){
       if (r===0) {
         arrC[r] =[]
@@ -251,8 +254,10 @@ const Connector = ({
 
 class Test extends React.PureComponent {
   render() {
-    const { player, data } = this.props
-    const round = Math.log2(player)
+    const { data } = this.props
+    const round = data && data.match ? Number(data.match.p) : 0
+    const player = data && data.match ? Number(data.match.numPlayers) : 0
+    // const round = Math.log2(player)
     console.log('DATAAAAAAA ', data)
     return (
         <svg className="bracket-svg" width={round*244} height={player*108} viewBox={`-0 0 ${round*244} ${player*108}`}>
