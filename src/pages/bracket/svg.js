@@ -4,7 +4,8 @@ import './style.css'
 const GBracket = ({
   x = 0,
   y = 0,
-  name="Team A",
+  nameA="",
+  nameB="",
   match = 1,
   index
 }) => {
@@ -37,7 +38,7 @@ const GBracket = ({
           0
           </text>
           <text clipPath="url(#clipPath2191076)" x="55" y="15" width="147" height="12" textAnchor="start" className="match--player-name ">
-            {name}
+            {nameA}
           </text>
         </svg>
         <svg x="0" y="28" className="match--player">
@@ -56,7 +57,7 @@ const GBracket = ({
             1
           </text>
           <text clipPath="url(#clipPath2191076)" x="55" y="15" width="147" height="12" textAnchor="start" className="match--player-name ">
-            {name}
+            {nameB}
           </text>
         <line x1="26" y1="-0.5" x2="226" y2="-0.5" className="match--player-divider" />
         </svg>
@@ -82,7 +83,10 @@ const Bracket = ({
     data
 }) => {
     const maxRound = data && data.match ? Number(data.match.p) : 0
-    const player = data && data.match ? Number(data.match.numPlayers) : 0
+    const player = Math.pow(2,maxRound)
+    const byePlayer = data && data.match ? Number(player - data.match.numPlayers) : 0
+    const dataPlayer = data && data.winnerBracket ? data.winnerBracket.Winner : {}
+    const keyWinner = Object.keys(dataPlayer)
     let g = []
     let X = 244
     let Y = player <= 8 ? 54 : 54*0.5
@@ -92,17 +96,28 @@ const Bracket = ({
     for(let i=0; i< maxRound; i++){
       if(i===0){
         arr[i]=[]
+        let indexPlayer = 0
         for(let j=0; j< player; j++){
           if (j%2===1) {
-              arr[i].push(j)
+            let nameA, nameB
+            const playerInfo = dataPlayer[keyWinner[i]][indexPlayer]
+            nameA = playerInfo.pName[0] || playerInfo.p[0]
+            nameB = playerInfo.pName[1] || playerInfo.p[1]
+            console.log('ini', playerInfo)
+            indexPlayer++
+            arr[i].push(j)
+            if (!playerInfo.p.includes(-1)) {
               g.push(
                 GBracket({
+                  nameA,
+                  nameB,
                   x: (i*X),
                   y: (j*Y),
                   match: j+1,
                   index: `${i}${j}`
                 })
               )
+            }
           }
         }
       }
@@ -152,19 +167,23 @@ const Connector = ({
 }) => {
     console.log('Data Connector ', data)
     const maxRound = data && data.match ? Number(data.match.p) : 0
-    const player = data && data.match ? Number(data.match.numPlayers) : 0
-    // const maxRound = Math.log2(player)
+    const player = Math.pow(2,maxRound)
+    const byePlayer = data && data.match ? Number(player - data.match.numPlayers) : 0
+    const dataPlayer = data && data.winnerBracket ? data.winnerBracket.Winner : {}
+    const keyWinner = Object.keys(dataPlayer)
 
-    let Y = player <= 8 ? 27 : 27*0.5
+    let Y = 27
 
     let c = []
     let arrC = []
     for(let r = 0, length2 = maxRound; r < length2; r++){
       if (r===0) {
         arrC[r] =[]
+        let indexPlayer = 0
         for(let i=0; i< player; i++){
           const underE = i=== player-1 && player === 8
           if(player<=8) {
+            console.log('i', i)
             if(i === 0 || underE){
               i = underE? i+1 : i
               const adder = 3
@@ -190,27 +209,38 @@ const Connector = ({
             }
           } else {
             if (i === 0 || (i+1)%4 === 1){
-              const adder = 3
-              const a = ((i*2 + adder)*Y)
-              const b = ((i*2+ 2 + adder)*Y)
+              const adder = 2
+              const a = ((i + adder)*Y)
+              const b = ((i+ 1 + adder)*Y)
               arrC[r].push(a,b)
+            }
+          }
+          if (i%2===1) {
+            const adder = indexPlayer % 2 === 1 ? 1 : 2
+            const a = (indexPlayer*2+adder)*27
+            const b = ((i+ 1 + 2)*Y)-81
+
+            const playerInfo = dataPlayer[keyWinner[r]][indexPlayer]
+            if (!playerInfo.p.includes(-1) && playerInfo.id.m % 2 === 1) {
               c.push(
                 GConnector({
                   x: 0,
                   y: a,
                   index: `${a}${b}`,
-                  d: "M 228 1 L 236 1 L 236 54"
+                  d: `M 228 1 L 236 1 L 236 27 L 244 27`
                 })
               )
+            } if (!playerInfo.p.includes(-1) && playerInfo.id.m % 2 === 0) {
               c.push(
                 GConnector({
                   x: 0,
-                  y: b,
+                  y: a,
                   index: `${b}${a}`,
-                  d: "M 228 53 L 236 53 L 236 1 L 244 1"
+                  d: "M 228 26 L 236 26 L 236 1 L 244 1"
                 })
               )
             }
+            indexPlayer++
           }
         }
       }
@@ -220,7 +250,8 @@ const Connector = ({
           for(var i = 0, length3 = arrC[r].length/2; i < length3; i++){
             const data = arrC[r]
             const hasil = (data[i]*2)-Y
-            const pathHasil = Math.pow(2, r) * (4*Y)
+            const heighAdjust = player <= 8 ? 4 : 2
+            const pathHasil = Math.pow(2, r) * (heighAdjust*Y)
             if (i%2===0) {
               arrC[r+1].push(hasil)
               c.push(
@@ -228,7 +259,7 @@ const Connector = ({
                   x: (r+1)*244,
                   y: hasil,
                   index: `${(r+1)*244}${hasil}`,
-                  d: `M 228 1 L 236 1 L 236 ${pathHasil}`
+                  d: `M 228 1 L 236 1 L 236 ${pathHasil} L 244 ${pathHasil}`
                 })
               )
             }
@@ -258,7 +289,7 @@ class Test extends React.PureComponent {
   render() {
     const { data } = this.props
     const round = data && data.match ? Number(data.match.p) : 0
-    const player = data && data.match ? Number(data.match.numPlayers) : 0
+    const player = Math.pow(2,round)
     const height = player <= 8 ? 54 : (54*0.55)
     // const round = Math.log2(player)
     console.log('DATAAAAAAA ', data)
