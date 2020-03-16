@@ -10,524 +10,16 @@ class Test extends React.PureComponent {
       inputPlayer: 0,
       player: 0,
       data : {
-          "id": 1584234043,
-          "match": {
-            "numPlayers": 11,
-            "byePlayers": 5,
-            "name": "Duel",
-            "isLong": false,
-            "last": 1,
-            "limit": 0,
-            "downMix": false,
-            "p": 4,
-            "matches": [
-              {
-                "id": {
-                  "s": 1,
-                  "r": 1,
-                  "m": 1
-                },
-                "p": [
-                  1,
-                  -1
-                ],
-                "m": [
-                  1,
-                  0
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 1,
-                  "m": 2
-                },
-                "p": [
-                  9,
-                  8
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 1,
-                  "m": 3
-                },
-                "p": [
-                  5,
-                  -1
-                ],
-                "m": [
-                  1,
-                  0
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 1,
-                  "m": 4
-                },
-                "p": [
-                  -1,
-                  4
-                ],
-                "m": [
-                  0,
-                  1
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 1,
-                  "m": 5
-                },
-                "p": [
-                  3,
-                  -1
-                ],
-                "m": [
-                  1,
-                  0
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 1,
-                  "m": 6
-                },
-                "p": [
-                  11,
-                  6
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 1,
-                  "m": 7
-                },
-                "p": [
-                  7,
-                  10
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 1,
-                  "m": 8
-                },
-                "p": [
-                  -1,
-                  2
-                ],
-                "m": [
-                  0,
-                  1
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 2,
-                  "m": 1
-                },
-                "p": [
-                  1,
-                  0
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 2,
-                  "m": 2
-                },
-                "p": [
-                  5,
-                  4
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 2,
-                  "m": 3
-                },
-                "p": [
-                  3,
-                  0
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 2,
-                  "m": 4
-                },
-                "p": [
-                  0,
-                  2
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 3,
-                  "m": 1
-                },
-                "p": [
-                  0,
-                  0
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 3,
-                  "m": 2
-                },
-                "p": [
-                  0,
-                  0
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 4,
-                  "m": 1
-                },
-                "p": [
-                  0,
-                  0
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              }
-            ],
-            "state": [],
-            "pLower": 5
-          },
-          "allMatch": {
-            "Winner Round 1": [
-              {
-                "id": {
-                  "s": 1,
-                  "r": 1,
-                  "m": 1
-                },
-                "p": [
-                  1,
-                  -1
-                ],
-                "m": [
-                  1,
-                  0
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 1,
-                  "m": 2
-                },
-                "p": [
-                  9,
-                  8
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 1,
-                  "m": 3
-                },
-                "p": [
-                  5,
-                  -1
-                ],
-                "m": [
-                  1,
-                  0
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 1,
-                  "m": 4
-                },
-                "p": [
-                  -1,
-                  4
-                ],
-                "m": [
-                  0,
-                  1
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 1,
-                  "m": 5
-                },
-                "p": [
-                  3,
-                  -1
-                ],
-                "m": [
-                  1,
-                  0
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 1,
-                  "m": 6
-                },
-                "p": [
-                  11,
-                  6
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 1,
-                  "m": 7
-                },
-                "p": [
-                  7,
-                  10
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 1,
-                  "m": 8
-                },
-                "p": [
-                  -1,
-                  2
-                ],
-                "m": [
-                  0,
-                  1
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              }
-            ],
-            "Winner Round 2": [
-              {
-                "id": {
-                  "s": 1,
-                  "r": 2,
-                  "m": 1
-                },
-                "p": [
-                  1,
-                  0
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 2,
-                  "m": 2
-                },
-                "p": [
-                  5,
-                  4
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 2,
-                  "m": 3
-                },
-                "p": [
-                  3,
-                  0
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 2,
-                  "m": 4
-                },
-                "p": [
-                  0,
-                  2
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              }
-            ],
-            "Winner Round 3": [
-              {
-                "id": {
-                  "s": 1,
-                  "r": 3,
-                  "m": 1
-                },
-                "p": [
-                  0,
-                  0
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              },
-              {
-                "id": {
-                  "s": 1,
-                  "r": 3,
-                  "m": 2
-                },
-                "p": [
-                  0,
-                  0
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              }
-            ],
-            "final": [
-              {
-                "id": {
-                  "s": 1,
-                  "r": 4,
-                  "m": 1
-                },
-                "p": [
-                  0,
-                  0
-                ],
-                "pName": [
-                  null,
-                  null
-                ]
-              }
-            ]
-          },
-          "winnerBracket": {
-            "Winner": {
-              "Round 1": [
+        "id": 1584314413,
+            "match": {
+              "numPlayers": 16,
+              "name": "Duel",
+              "isLong": false,
+              "last": 2,
+              "limit": 0,
+              "downMix": true,
+              "p": 4,
+              "matches": [
                 {
                   "id": {
                     "s": 1,
@@ -536,11 +28,7 @@ class Test extends React.PureComponent {
                   },
                   "p": [
                     1,
-                    -1
-                  ],
-                  "m": [
-                    1,
-                    0
+                    16
                   ],
                   "pName": [
                     null,
@@ -570,11 +58,7 @@ class Test extends React.PureComponent {
                   },
                   "p": [
                     5,
-                    -1
-                  ],
-                  "m": [
-                    1,
-                    0
+                    12
                   ],
                   "pName": [
                     null,
@@ -588,12 +72,8 @@ class Test extends React.PureComponent {
                     "m": 4
                   },
                   "p": [
-                    -1,
+                    13,
                     4
-                  ],
-                  "m": [
-                    0,
-                    1
                   ],
                   "pName": [
                     null,
@@ -608,11 +88,7 @@ class Test extends React.PureComponent {
                   },
                   "p": [
                     3,
-                    -1
-                  ],
-                  "m": [
-                    1,
-                    0
+                    14
                   ],
                   "pName": [
                     null,
@@ -656,20 +132,14 @@ class Test extends React.PureComponent {
                     "m": 8
                   },
                   "p": [
-                    -1,
+                    15,
                     2
-                  ],
-                  "m": [
-                    0,
-                    1
                   ],
                   "pName": [
                     null,
                     null
                   ]
-                }
-              ],
-              "Round 2": [
+                },
                 {
                   "id": {
                     "s": 1,
@@ -677,7 +147,7 @@ class Test extends React.PureComponent {
                     "m": 1
                   },
                   "p": [
-                    1,
+                    0,
                     0
                   ],
                   "pName": [
@@ -692,8 +162,8 @@ class Test extends React.PureComponent {
                     "m": 2
                   },
                   "p": [
-                    5,
-                    4
+                    0,
+                    0
                   ],
                   "pName": [
                     null,
@@ -707,7 +177,7 @@ class Test extends React.PureComponent {
                     "m": 3
                   },
                   "p": [
-                    3,
+                    0,
                     0
                   ],
                   "pName": [
@@ -723,6 +193,402 @@ class Test extends React.PureComponent {
                   },
                   "p": [
                     0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 1,
+                    "r": 3,
+                    "m": 1
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 1,
+                    "r": 3,
+                    "m": 2
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 1,
+                    "r": 4,
+                    "m": 1
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 1,
+                    "m": 1
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 1,
+                    "m": 2
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 1,
+                    "m": 3
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 1,
+                    "m": 4
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 2,
+                    "m": 1
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 2,
+                    "m": 2
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 2,
+                    "m": 3
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 2,
+                    "m": 4
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 3,
+                    "m": 1
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 3,
+                    "m": 2
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 4,
+                    "m": 1
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 4,
+                    "m": 2
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 5,
+                    "m": 1
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 6,
+                    "m": 1
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 7,
+                    "m": 1
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                }
+              ],
+              "state": [],
+              "pLower": 6
+            },
+            "allMatch": {
+              "Winner Round 1": [
+                {
+                  "id": {
+                    "s": 1,
+                    "r": 1,
+                    "m": 1
+                  },
+                  "p": [
+                    1,
+                    16
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 1,
+                    "r": 1,
+                    "m": 2
+                  },
+                  "p": [
+                    9,
+                    8
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 1,
+                    "r": 1,
+                    "m": 3
+                  },
+                  "p": [
+                    5,
+                    12
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 1,
+                    "r": 1,
+                    "m": 4
+                  },
+                  "p": [
+                    13,
+                    4
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 1,
+                    "r": 1,
+                    "m": 5
+                  },
+                  "p": [
+                    3,
+                    14
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 1,
+                    "r": 1,
+                    "m": 6
+                  },
+                  "p": [
+                    11,
+                    6
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 1,
+                    "r": 1,
+                    "m": 7
+                  },
+                  "p": [
+                    7,
+                    10
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 1,
+                    "r": 1,
+                    "m": 8
+                  },
+                  "p": [
+                    15,
                     2
                   ],
                   "pName": [
@@ -731,7 +597,69 @@ class Test extends React.PureComponent {
                   ]
                 }
               ],
-              "Round 3": [
+              "Winner Round 2": [
+                {
+                  "id": {
+                    "s": 1,
+                    "r": 2,
+                    "m": 1
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 1,
+                    "r": 2,
+                    "m": 2
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 1,
+                    "r": 2,
+                    "m": 3
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 1,
+                    "r": 2,
+                    "m": 4
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                }
+              ],
+              "Winner Round 3": [
                 {
                   "id": {
                     "s": 1,
@@ -779,10 +707,726 @@ class Test extends React.PureComponent {
                     null
                   ]
                 }
+              ],
+              "Loser Round 1": [
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 1,
+                    "m": 1
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 1,
+                    "m": 2
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 1,
+                    "m": 3
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 1,
+                    "m": 4
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                }
+              ],
+              "Loser Round 2": [
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 2,
+                    "m": 1
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 2,
+                    "m": 2
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 2,
+                    "m": 3
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 2,
+                    "m": 4
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                }
+              ],
+              "Loser Round 3": [
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 3,
+                    "m": 1
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 3,
+                    "m": 2
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                }
+              ],
+              "Loser Round 4": [
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 4,
+                    "m": 1
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                },
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 4,
+                    "m": 2
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                }
+              ],
+              "Loser Round 5": [
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 5,
+                    "m": 1
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                }
+              ],
+              "Loser Round 6": [
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 6,
+                    "m": 1
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                }
+              ],
+              "Loser Round 7": [
+                {
+                  "id": {
+                    "s": 2,
+                    "r": 7,
+                    "m": 1
+                  },
+                  "p": [
+                    0,
+                    0
+                  ],
+                  "pName": [
+                    null,
+                    null
+                  ]
+                }
               ]
+            },
+            "winnerBracket": {
+              "Winner": {
+                "Round 1": [
+                  {
+                    "id": {
+                      "s": 1,
+                      "r": 1,
+                      "m": 1
+                    },
+                    "p": [
+                      1,
+                      16
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  },
+                  {
+                    "id": {
+                      "s": 1,
+                      "r": 1,
+                      "m": 2
+                    },
+                    "p": [
+                      9,
+                      8
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  },
+                  {
+                    "id": {
+                      "s": 1,
+                      "r": 1,
+                      "m": 3
+                    },
+                    "p": [
+                      5,
+                      12
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  },
+                  {
+                    "id": {
+                      "s": 1,
+                      "r": 1,
+                      "m": 4
+                    },
+                    "p": [
+                      13,
+                      4
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  },
+                  {
+                    "id": {
+                      "s": 1,
+                      "r": 1,
+                      "m": 5
+                    },
+                    "p": [
+                      3,
+                      14
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  },
+                  {
+                    "id": {
+                      "s": 1,
+                      "r": 1,
+                      "m": 6
+                    },
+                    "p": [
+                      11,
+                      6
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  },
+                  {
+                    "id": {
+                      "s": 1,
+                      "r": 1,
+                      "m": 7
+                    },
+                    "p": [
+                      7,
+                      10
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  },
+                  {
+                    "id": {
+                      "s": 1,
+                      "r": 1,
+                      "m": 8
+                    },
+                    "p": [
+                      15,
+                      2
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  }
+                ],
+                "Round 2": [
+                  {
+                    "id": {
+                      "s": 1,
+                      "r": 2,
+                      "m": 1
+                    },
+                    "p": [
+                      0,
+                      0
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  },
+                  {
+                    "id": {
+                      "s": 1,
+                      "r": 2,
+                      "m": 2
+                    },
+                    "p": [
+                      0,
+                      0
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  },
+                  {
+                    "id": {
+                      "s": 1,
+                      "r": 2,
+                      "m": 3
+                    },
+                    "p": [
+                      0,
+                      0
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  },
+                  {
+                    "id": {
+                      "s": 1,
+                      "r": 2,
+                      "m": 4
+                    },
+                    "p": [
+                      0,
+                      0
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  }
+                ],
+                "Round 3": [
+                  {
+                    "id": {
+                      "s": 1,
+                      "r": 3,
+                      "m": 1
+                    },
+                    "p": [
+                      0,
+                      0
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  },
+                  {
+                    "id": {
+                      "s": 1,
+                      "r": 3,
+                      "m": 2
+                    },
+                    "p": [
+                      0,
+                      0
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  }
+                ],
+                "final": [
+                  {
+                    "id": {
+                      "s": 1,
+                      "r": 4,
+                      "m": 1
+                    },
+                    "p": [
+                      0,
+                      0
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  }
+                ]
+              },
+              "Loser": {
+                "Round 1": [
+                  {
+                    "id": {
+                      "s": 2,
+                      "r": 1,
+                      "m": 1
+                    },
+                    "p": [
+                      0,
+                      0
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  },
+                  {
+                    "id": {
+                      "s": 2,
+                      "r": 1,
+                      "m": 2
+                    },
+                    "p": [
+                      0,
+                      0
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  },
+                  {
+                    "id": {
+                      "s": 2,
+                      "r": 1,
+                      "m": 3
+                    },
+                    "p": [
+                      0,
+                      0
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  },
+                  {
+                    "id": {
+                      "s": 2,
+                      "r": 1,
+                      "m": 4
+                    },
+                    "p": [
+                      0,
+                      0
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  }
+                ],
+                "Round 2": [
+                  {
+                    "id": {
+                      "s": 2,
+                      "r": 2,
+                      "m": 1
+                    },
+                    "p": [
+                      0,
+                      0
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  },
+                  {
+                    "id": {
+                      "s": 2,
+                      "r": 2,
+                      "m": 2
+                    },
+                    "p": [
+                      0,
+                      0
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  },
+                  {
+                    "id": {
+                      "s": 2,
+                      "r": 2,
+                      "m": 3
+                    },
+                    "p": [
+                      0,
+                      0
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  },
+                  {
+                    "id": {
+                      "s": 2,
+                      "r": 2,
+                      "m": 4
+                    },
+                    "p": [
+                      0,
+                      0
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  }
+                ],
+                "Round 3": [
+                  {
+                    "id": {
+                      "s": 2,
+                      "r": 3,
+                      "m": 1
+                    },
+                    "p": [
+                      0,
+                      0
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  },
+                  {
+                    "id": {
+                      "s": 2,
+                      "r": 3,
+                      "m": 2
+                    },
+                    "p": [
+                      0,
+                      0
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  }
+                ],
+                "Round 4": [
+                  {
+                    "id": {
+                      "s": 2,
+                      "r": 4,
+                      "m": 1
+                    },
+                    "p": [
+                      0,
+                      0
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  },
+                  {
+                    "id": {
+                      "s": 2,
+                      "r": 4,
+                      "m": 2
+                    },
+                    "p": [
+                      0,
+                      0
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  }
+                ],
+                "Round 5": [
+                  {
+                    "id": {
+                      "s": 2,
+                      "r": 5,
+                      "m": 1
+                    },
+                    "p": [
+                      0,
+                      0
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  }
+                ],
+                "Round 6": [
+                  {
+                    "id": {
+                      "s": 2,
+                      "r": 6,
+                      "m": 1
+                    },
+                    "p": [
+                      0,
+                      0
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  }
+                ],
+                "Round 7": [
+                  {
+                    "id": {
+                      "s": 2,
+                      "r": 7,
+                      "m": 1
+                    },
+                    "p": [
+                      0,
+                      0
+                    ],
+                    "pName": [
+                      null,
+                      null
+                    ]
+                  }
+                ]
+              }
             }
-          }
-        },
+      },
       success: false
     }
   }
@@ -794,7 +1438,7 @@ class Test extends React.PureComponent {
     const res = await request({
       method: 'post',  
       fullUrl: true,
-      url: 'http://104.248.158.210:3000/tournament/bracket/single',
+      url: 'http://localhost:3000/tournament/bracket/double',
       auth: false,
       data: {
         player: Number(this.state.inputPlayer),
