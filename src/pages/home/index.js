@@ -33,6 +33,7 @@ const Index = () => {
           <li><Link to="/url_paginate">Pagination with URL</Link></li>
           <li><Link to="/select">Select</Link></li>
           <li><Link to="/bracket">Bracket</Link></li>
+          <li><Link to="/form">Form</Link></li>
         </ul>
       </div>
     </>
