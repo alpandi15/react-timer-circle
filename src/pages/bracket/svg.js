@@ -108,7 +108,7 @@ const Bracket = ({
             indexPlayer++
             arr[i].push(j)
             if (!playerInfo.p.includes(-1)) {
-              round1Lower.push(j%3)
+              round1Lower.push(j)
               g.push(
                 GBracket({
                   nameA,
@@ -334,6 +334,9 @@ const BracketLower = ({
             console.log('J', j, j+4,j+(2*4), j+(3*4))
 
           arr[i].push(j*Y)
+
+          console.log('roun_lower1', round1Lower.length > round2Lower.length? round1Lower.length - round2Lower.length : round1Lower.length)
+          console.log('roun_lower2', round1Lower.length > round2Lower.length? round2Lower.length : round2Lower.length/2)
           // first lower
           // rumus jika round 1 > round 2 upper
           // 
@@ -341,21 +344,26 @@ const BracketLower = ({
           // 
           // else round1Lower = round1Upper and round2Lower = round2upper / 2
 
-          if (playerInfo.p.includes(0)) {
-            console.log('roun1', round1Lower, j)
-            g.push(
-              GBracket({
-                nameA: 27,
-                nameB,
-                x: (i*X),
-                y: (j*Y),
-                match: j+1,
-                index: `${i}${j}`
-              })
-            )
-          }
+          if (round1Lower.length > round2Lower.length) {
+              console.log('roun1', round1Lower, j)
+            if (playerInfo.p.includes(0)) {
+              g.push(
+                GBracket({
+                  nameA: 27,
+                  nameB,
+                  x: (i*X),
+                  y: (j*Y),
+                  match: j+1,
+                  index: `${i}${j}`
+                })
+              )
+            }
+          } else {
+            // kerjakan bgian pertama nya
+            if (round) {}
             // mirror lower
-          if (j%2===0) {
+          }
+          if (j%2===0 || round1Lower.length > round2Lower.length) {
             console.log('roun2', round2Lower, j+2)
             g.push(
               GBracket({
@@ -545,7 +553,11 @@ const ConnectorLower = ({
 
 class Test extends React.PureComponent {
   render() {
-    const { data } = this.props
+    const {
+      data
+    } = this.props
+    round1Lower = []
+    round2Lower = []
     const round = data && data.match ? Number(data.match.p) : 0
     const player = Math.pow(2,round)
     const roundLower = data && data.match ? Number(data.match.pLower) : 0
