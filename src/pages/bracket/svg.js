@@ -344,7 +344,7 @@ const BracketLower = ({
           // 
           // else round1Lower = round1Upper and round2Lower = round2upper / 2
 
-          if (round1Lower.length > round2Lower.length) {
+          if (round1Lower.length < round2Lower.length) {
               console.log('roun1', round1Lower, j)
             if (playerInfo.p.includes(0)) {
               g.push(
@@ -359,9 +359,20 @@ const BracketLower = ({
               )
             }
           } else {
-            // kerjakan bgian pertama nya
-            if (round) {}
-            // mirror lower
+            console.log('roun1', round1Lower, j)
+            if (round1Lower.includes((j+1)*4+1) || data.match.numPlayers %2 === 0) {
+            console.log('else', j, (j+1)*4+1, (((j+1)*4+1)- (j*2)))
+              g.push(
+                GBracket({
+                  nameA: (j+1)*4+1,
+                  nameB,
+                  x: (i*X),
+                  y: (((j+1)*4+1)- (j*2)-1)*27,
+                  match: j+1,
+                  index: `${i}${j}`
+                })
+              )
+            }
           }
           if (j%2===0 || round1Lower.length > round2Lower.length) {
             console.log('roun2', round2Lower, j+2)
@@ -573,7 +584,7 @@ class Test extends React.PureComponent {
             <Bracket data={data} />
           </g>
         </svg>
-        <svg className="bracket-svg" width={roundLower*244} height={playerLower*parseInt(height)} viewBox={`0 0 ${roundLower*244} ${playerLower*parseInt(height)}`}>
+        <svg className="bracket-svg" width={roundLower*244} height={player*parseInt(height)} viewBox={`0 0 ${roundLower*244} ${playerLower*parseInt(height)}`}>
           <g className="parent">
             <BracketLower data={data} />
             <ConnectorLower data={data} />
