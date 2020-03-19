@@ -2,6 +2,7 @@ import React from 'react'
 import './style.css'
 let round1Lower =[]
 let round2Lower =[]
+let arrConnector =[]
 
 const GBracket = ({
   x = 0,
@@ -86,7 +87,7 @@ const Bracket = ({
 }) => {
     const maxRound = data && data.match ? Number(data.match.p) : 0
     const player = Math.pow(2,maxRound)
-    const byePlayer = data && data.match ? Number(player - data.match.numPlayers) : 0
+    // const byePlayer = data && data.match ? Number(player - data.match.numPlayers) : 0
     const dataPlayer = data && data.winnerBracket ? data.winnerBracket.Winner : {}
     const keyWinner = Object.keys(dataPlayer)
     let g = []
@@ -303,31 +304,34 @@ const Connector = ({
 const BracketLower = ({
     data
 }) => {
-  console.log('r1 r2', round1Lower, round2Lower)
+  // console.log('r1 r2', round1Lower, round2Lower)
     const maxRound = data && data.match ? Number(data.match.p) : 0
     const player = Math.pow(2,maxRound)
-    const byePlayer = data && data.match ? Number(player - data.match.numPlayers) : 0
+    // const byePlayer = data && data.match ? Number(player - data.match.numPlayers) : 0
     const p = data && data.match ? Number(data.match.p) : 0
     const dataPlayer = data && data.winnerBracket ? data.winnerBracket.Loser : {}
     const keyWinner = Object.keys(dataPlayer)
     let g = []
     let X = 244
     let Y = player <= 8 ? 54 : 54
-    console.log('Lower jalan', keyWinner.length)
+    // console.log('Lower jalan', keyWinner.length)
     let arr = []
+    arrConnector = []
     let adjustHeighA = 0
     let adjustHeighB = 1
-    let checkMe = []
+    // let checkMe = []
     for(let i=0; i< keyWinner.length; i++){
       const playerPerRound = dataPlayer[keyWinner[i]]
 
       if (i%2 === 0) {
         if (i===0) {
           arr[i]=[]
+          arrConnector[i]=[]
+          arrConnector[i+1]=[]
           let nameA,nameB
           for(var j = 0, length2 = playerPerRound.length; j < length2; j++){
             const playerInfo = playerPerRound[j]
-            const playerInfoMirror = dataPlayer[keyWinner[i+1]][j]
+            // const playerInfoMirror = dataPlayer[keyWinner[i+1]][j]
             nameA = playerInfo.pName[0] || playerInfo.p[0] || ''
             nameB = playerInfo.pName[1] || playerInfo.p[1] || ''
             // console.log('playerI', playerInfoMirror, j, j+1)
@@ -335,8 +339,8 @@ const BracketLower = ({
 
           arr[i].push(j*Y)
 
-          console.log('roun_lower1', round1Lower.length > round2Lower.length? round1Lower.length - round2Lower.length : round1Lower.length)
-          console.log('roun_lower2', round1Lower.length > round2Lower.length? round2Lower.length : round2Lower.length/2)
+          // console.log('roun_lower1', round1Lower.length > round2Lower.length? round1Lower.length - round2Lower.length : round1Lower.length)
+          // console.log('roun_lower2', round1Lower.length > round2Lower.length? round2Lower.length : round2Lower.length/2)
           // first lower
           // rumus jika round 1 > round 2 upper
           // 
@@ -345,11 +349,12 @@ const BracketLower = ({
           // else round1Lower = round1Upper and round2Lower = round2upper / 2
 
           if (round1Lower.length < round2Lower.length) {
-              console.log('roun1', round1Lower, j)
+              // console.log('roun1', round1Lower, j)
             if (playerInfo.p.includes(0)) {
+              arrConnector[i].push({y:j*Y, x:i*X})
               g.push(
                 GBracket({
-                  nameA: 27,
+                  nameA: 'roun1',
                   nameB,
                   x: (i*X),
                   y: (j*Y),
@@ -359,9 +364,10 @@ const BracketLower = ({
               )
             }
           } else {
-            console.log('roun1', round1Lower, j)
+            // console.log('roun1', round1Lower, j)
             if (round1Lower.includes((j+1)*4+1) || data.match.numPlayers %2 === 0) {
-            console.log('else', j, (j+1)*4+1, (((j+1)*4+1)- (j*2)))
+            // console.log('else', j, (j+1)*4+1, (((j+1)*4+1)- (j*2)))
+            arrConnector[i].push({y: (((j+1)*4+1)- (j*2)-1)*27, x: i*X })
               g.push(
                 GBracket({
                   nameA: (j+1)*4+1,
@@ -375,10 +381,11 @@ const BracketLower = ({
             }
           }
           if (j%2===0 || round1Lower.length > round2Lower.length) {
-            console.log('roun2', round2Lower, j+2)
+            // console.log('roun2', round2Lower, j+2)
+            arrConnector[i+1].push({ y: (j*Y)+27, x: (i+1)*X })
             g.push(
               GBracket({
-                nameA,
+                nameA:'round2',
                 nameB,
                 x: ((i+1)*X),
                 y: (j*Y)+27,
@@ -392,21 +399,19 @@ const BracketLower = ({
         const dataRound = arr[i]
         if (dataRound && dataRound.length && i < p) {
           arr[i+2] = []
+          arrConnector[i+2]=[]
+          arrConnector[i+3]=[]
           for(var k = 0, length3 = dataRound.length; k < length3; k++){
             if (k%2 === 0) {
-              const adder = checkMe.includes(i+2) ? adjustHeighA*27 : 0
-              const adderMirror = checkMe.includes(i+3) ? adjustHeighA*27 : 0
-              // console.log('array i', i+2, adder)
-              // console.log('array i+1', i+3, adderMirror)
-              // console.log('checkMe', )
 
               const hasil = dataRound[k] + dataRound[k+1]
               let nameA, nameB
               arr[i+2].push(hasil/2)
               // first lower
+                  arrConnector[i+2].push({y: hasil/2, x: (i+2)*X })
                   g.push(
                     GBracket({
-                      nameA: adjustHeighA,
+                      nameA: 'first',
                       nameB: adjustHeighB,
                       x: ((i+2)*X),
                       y: (hasil/2),
@@ -415,9 +420,29 @@ const BracketLower = ({
                     })
                   )
                 // mirror lower
+                // of maxPlayer 32 mirror /2
+                // if (true) {}
+                if (player > 16) {
+                  if (k%4===2) {
+                console.log('max player', player, k,i)
+                      arrConnector[i+3].push({y: (hasil/2)-((i+2)*27), x: (i+3)*X })
+                      g.push(
+                        GBracket({
+                          nameA: 'if'+adjustHeighA,
+                          nameB,
+                          x: ((i+3)*X),
+                          y: (hasil/2)-((i+2)*27),
+                          match: j+1,
+                          index: `${i+3}${hasil/2}`
+                        })
+                      )          
+                    }
+                } else {
+                  console.log('kok jalan')
+                  arrConnector[i+3].push({y: (hasil/2), x: (i+3)*X })
                   g.push(
                     GBracket({
-                      nameA: adjustHeighA,
+                      nameA: 'else'+adjustHeighA,
                       nameB,
                       x: ((i+3)*X),
                       y: (hasil/2),
@@ -425,13 +450,14 @@ const BracketLower = ({
                       index: `${i+3}${hasil/2}`
                     })
                   )          
+                }
               // console.log('i lower', i+3, k, adjustHeighA)
             }
           }
         }
       }
     }
-    console.log('arr Lower', arr)
+    console.log('arr Lower conector', arrConnector)
     return (
         <g>
             {g}
@@ -442,118 +468,38 @@ const BracketLower = ({
 const ConnectorLower = ({
     data
 }) => {
-  const maxRound = data && data.match ? Number(data.match.p) : 0
-  const player = Math.pow(2,maxRound)
-  const byePlayer = data && data.match ? Number(player - data.match.numPlayers) : 0
-  const p = data && data.match ? Number(data.match.p) : 0
-  const dataPlayer = data && data.winnerBracket ? data.winnerBracket.Loser : {}
-  const keyWinner = Object.keys(dataPlayer)
+  // d: "M 228 1 L 236 1 L 236 27 L 244 27" atas
+  // "M 228 26 L 236 26 L 236 1 L 244 1" bawah
+  // "M 228 26 L 260 26" datar
   let g = []
-  let X = 244
-  let Y = player <= 8 ? 54 : 54
-  console.log('Lower jalan', keyWinner.length)
-  let arr = []
-  let adjustHeighA = 0
-  let adjustHeighB = 1
-  let checkMe = []
-  for(let i=0; i< keyWinner.length; i++){
-    const playerPerRound = dataPlayer[keyWinner[i]]
-
-    if (i%2 === 0) {
-      if (i===0) {
-        arr[i]=[]
-        let nameA,nameB
-        for(var j = 0, length2 = playerPerRound.length; j < length2; j++){
-          const playerInfo = playerPerRound[j]
-          const playerInfoMirror = dataPlayer[keyWinner[i+1]][j]
-          nameA = playerInfo.pName[0] || playerInfo.p[0] || ''
-          nameB = playerInfo.pName[1] || playerInfo.p[1] || ''
-          console.log('playerI', playerInfoMirror, j, j+1)
-
-        arr[i].push(j*Y)
-        // first lower
-        const adder = 2
-        const a = ((i + adder)*Y)
-        const b = ((i+ 2 + adder)*Y)
-        if (playerInfo.p.includes(0)) {
-          if (j%2 === 0) {
-            g.push(
-              GConnector({
-                x: 0,
-                y: (j*Y)+27,
-                index: `${a}${b}`,
-                d: "M 228 1 L 236 1 L 236 27 L 244 27"
-              })
-            )
-          }
-          if (j%2 === 1) {
-            console.log('j', j, i)
-            g.push(
-              GConnector({
-                x: 0,
-                y: (j*2)*27,
-                index: `${b}${a}`,
-                d: "M 228 26 L 236 26 L 236 1 L 244 1"
-              })
-            )
-          }
-        }
-          // mirror lower
-        // if (j%2===0) {
-        //   g.push(
-        //     GConnector({
-        //       x: 0,
-        //       y: b,
-        //       index: `${b}${a}`,
-        //       d: "M 228 53 L 236 53 L 236 1 L 244 1"
-        //     })
-        //   )
-        // }
-        }
+  console.log('arrConnectornya', arrConnector)
+  for(let i=0; i< arrConnector.length; i++){
+    const dataRound = arrConnector[i]
+    for(var k = 0, length3 = dataRound.length; k < length3; k++){
+      const position = dataRound[k]
+      const nextPosition = dataRound[k+1] || {}
+      console.log('position =', position.y, nextPosition.y, k)
+      let connector = "M 228 26 L 260 26"
+      if (nextPosition.y - position.y >= 54) {
+        connector = `M 228 ${26} L 236 ${26} L 236 ${54} L 244 ${54}`
       }
-      const dataRound = arr[i]
-      if (dataRound && dataRound.length && i < p) {
-        arr[i+2] = []
-        for(var k = 0, length3 = dataRound.length; k < length3; k++){
-          if (k%2 === 0) {
-            const adder = checkMe.includes(i+2) ? adjustHeighA*27 : 0
-            const adderMirror = checkMe.includes(i+3) ? adjustHeighA*27 : 0
-            // console.log('array i', i+2, adder)
-            // console.log('array i+1', i+3, adderMirror)
-            // console.log('checkMe', )
-
-            const hasil = dataRound[k] + dataRound[k+1]
-            let nameA, nameB
-            arr[i+2].push(hasil/2)
-            // first lower
-                g.push(
-                  GBracket({
-                    nameA: adjustHeighA,
-                    nameB: adjustHeighB,
-                    x: ((i+2)*X),
-                    y: (hasil/2),
-                    match: j+1,
-                    index: `${i}${hasil/2}`
-                  })
-                )
-              // mirror lower
-                g.push(
-                  GBracket({
-                    nameA: adjustHeighA,
-                    nameB,
-                    x: ((i+3)*X),
-                    y: (hasil/2),
-                    match: j+1,
-                    index: `${i+3}${hasil/2}`
-                  })
-                )          
-            // console.log('i lower', i+3, k, adjustHeighA)
-          }
-        }
+      // if (nextPosition.y - position.y === 54) {
+      //   connector = `M 228 ${26} L 236 ${26} L 236 ${1} L 244 ${1}`
+      // }
+      if (!nextPosition.y) {
+        connector = `M 228 ${26} L 236 ${26} L 236 ${1} L 244 ${1}`
       }
+
+      g.push(
+        GConnector({
+          x: position.x,
+          y: position.y,
+          index: `${position.x}${position.y}`,
+          d: connector
+        })
+      )
     }
   }
-  console.log('arr Lower', arr)
   return (
       <g>
           {g}
@@ -569,6 +515,7 @@ class Test extends React.PureComponent {
     } = this.props
     round1Lower = []
     round2Lower = []
+    arrConnector = []
     const round = data && data.match ? Number(data.match.p) : 0
     const player = Math.pow(2,round)
     const roundLower = data && data.match ? Number(data.match.pLower) : 0
