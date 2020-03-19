@@ -475,29 +475,37 @@ const ConnectorLower = ({
   console.log('arrConnectornya', arrConnector)
   for(let i=0; i< arrConnector.length; i++){
     const dataRound = arrConnector[i]
+    const nextDataRound = arrConnector[i+1] || {}
     for(var k = 0, length3 = dataRound.length; k < length3; k++){
       const position = dataRound[k]
       const nextPosition = dataRound[k+1] || {}
       console.log('position =', position.y, nextPosition.y, k)
       let connector = "M 228 26 L 260 26"
-      if (nextPosition.y - position.y >= 54) {
-        connector = `M 228 ${26} L 236 ${26} L 236 ${54} L 244 ${54}`
-      }
-      // if (nextPosition.y - position.y === 54) {
-      //   connector = `M 228 ${26} L 236 ${26} L 236 ${1} L 244 ${1}`
-      // }
-      if (!nextPosition.y) {
-        connector = `M 228 ${26} L 236 ${26} L 236 ${1} L 244 ${1}`
+      if (nextDataRound.length !== dataRound.length) {
+        if (nextPosition.y - position.y >= 54 || dataRound.length === 1) {
+          // bawah
+          connector = `M 228 ${26} L 236 ${26} L 236 ${54} L 244 ${54}`
+        }
+        if (!nextPosition.y && dataRound.length > 1) {
+          // atas
+          connector = `M 228 ${26} L 236 ${26} L 236 ${1} L 244 ${1}`
+        }
+        if (dataRound.length % 2 === 0 && k%2===1) {
+          // bawah
+          connector = `M 228 ${26} L 236 ${26} L 236 ${1} L 244 ${1}`
+        }
       }
 
-      g.push(
-        GConnector({
-          x: position.x,
-          y: position.y,
-          index: `${position.x}${position.y}`,
-          d: connector
-        })
-      )
+      if (i+2 < arrConnector.length) {
+        g.push(
+          GConnector({
+            x: position.x,
+            y: position.y,
+            index: `${position.x}${position.y}`,
+            d: connector
+          })
+        )
+      }
     }
   }
   return (
