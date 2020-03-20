@@ -109,7 +109,7 @@ const Bracket = ({
             indexPlayer++
             arr[i].push(j)
             if (!playerInfo.p.includes(-1)) {
-              round1Lower.push(j)
+              round1Lower.push(indexPlayer)
               g.push(
                 GBracket({
                   nameA,
@@ -154,7 +154,7 @@ const Bracket = ({
             hasil = hasil%2===1 ? hasil+1 : hasil
             arr[i+1].push(hasil)
             if (i+1 === 1) {
-              round2Lower.push(hasil)
+              round2Lower.push(indexPlayer)
             }
             g.push(
               GBracket({
@@ -339,17 +339,15 @@ const BracketLower = ({
 
           arr[i].push(j*Y)
 
-          // console.log('roun_lower1', round1Lower.length > round2Lower.length? round1Lower.length - round2Lower.length : round1Lower.length)
-          // console.log('roun_lower2', round1Lower.length > round2Lower.length? round2Lower.length : round2Lower.length/2)
           // first lower
           // rumus jika round 1 > round 2 upper
           // 
           // round1Lower = round1Upper - round2Upper and round2Lower = round2Upper
           // 
           // else round1Lower = round1Upper and round2Lower = round2upper / 2
-
-          if (round1Lower.length < round2Lower.length) {
-              // console.log('roun1', round1Lower, j)
+          let adjust = data.match.numPlayers %2 === 0? 0:27
+              // console.log('roun1', round1Lower, round2Lower)
+          if (round1Lower.length <= round2Lower.length) {
             if (playerInfo.p.includes(0)) {
               arrConnector[i].push({y:j*Y, x:i*X})
               g.push(
@@ -364,16 +362,17 @@ const BracketLower = ({
               )
             }
           } else {
-            // console.log('roun1', round1Lower, j)
-            if (round1Lower.includes((j+1)*4+1) || data.match.numPlayers %2 === 0) {
-            // console.log('else', j, (j+1)*4+1, (((j+1)*4+1)- (j*2)))
-            arrConnector[i].push({y: (((j+1)*4+1)- (j*2)-1)*27, x: i*X })
+            console.log('roun1', round1Lower, j)
+            if ((round1Lower.includes((j+1)*2) && round1Lower.includes(((j+1)*2)-1)) || data.match.numPlayers ===  player) {
+            console.log('else', j, (j+1)*2,(j+1)*2-1 )
+            // const specialAdjust = 4 * 27
+            arrConnector[i].push({y: ((j+1)*2-2)*27, x: i*X })
               g.push(
                 GBracket({
-                  nameA: (j+1)*4+1,
+                  nameA: 'round1 '+(j+1)*4+1,
                   nameB,
                   x: (i*X),
-                  y: (((j+1)*4+1)- (j*2)-1)*27,
+                  y: ((j+1)*2-2)*27,
                   match: j+1,
                   index: `${i}${j}`
                 })
@@ -381,14 +380,18 @@ const BracketLower = ({
             }
           }
           if (j%2===0 || round1Lower.length > round2Lower.length) {
-            // console.log('roun2', round2Lower, j+2)
-            arrConnector[i+1].push({ y: (j*Y)+27, x: (i+1)*X })
+            console.log('roun2', round2Lower.length, round1Lower.length)
+            if (round2Lower.length > round1Lower.length) {
+              console.log('masuk special case')
+              adjust = 27
+            }
+            arrConnector[i+1].push({ y: (j*Y)+adjust, x: (i+1)*X })
             g.push(
               GBracket({
                 nameA:'round2',
                 nameB,
                 x: ((i+1)*X),
-                y: (j*Y)+27,
+                y: (j*Y)+adjust,
                 match: j+1,
                 index: `${i+1}${j}`
               })
@@ -476,11 +479,13 @@ const ConnectorLower = ({
   for(let i=0; i< arrConnector.length; i++){
     const dataRound = arrConnector[i]
     const nextDataRound = arrConnector[i+1] || {}
+    const nextDataRound2 = arrConnector[i+2] || {}
     for(var k = 0, length3 = dataRound.length; k < length3; k++){
       const position = dataRound[k]
       const nextPosition = dataRound[k+1] || {}
       console.log('position =', position.y, nextPosition.y, k)
       let connector = "M 228 26 L 260 26"
+      const checkGenap = nextDataRound2.length === dataRound.length
       if (nextDataRound.length !== dataRound.length) {
         if (nextPosition.y - position.y >= 54 || dataRound.length === 1) {
           // bawah
@@ -493,6 +498,10 @@ const ConnectorLower = ({
         if (dataRound.length % 2 === 0 && k%2===1) {
           // bawah
           connector = `M 228 ${26} L 236 ${26} L 236 ${1} L 244 ${1}`
+        }
+        if (checkGenap) {
+          console.log('msa sih?', nextDataRound2.length, dataRound.length)
+          connector = "M 228 26 L 260 26"
         }
       }
 
