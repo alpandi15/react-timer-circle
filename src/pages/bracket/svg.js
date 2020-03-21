@@ -1,5 +1,8 @@
 import React from 'react'
 import './style.css'
+let round1Lower =[]
+let round2Lower =[]
+let arrConnector =[]
 
 const GBracket = ({
   x = 0,
@@ -84,7 +87,7 @@ const Bracket = ({
 }) => {
     const maxRound = data && data.match ? Number(data.match.p) : 0
     const player = Math.pow(2,maxRound)
-    const byePlayer = data && data.match ? Number(player - data.match.numPlayers) : 0
+    // const byePlayer = data && data.match ? Number(player - data.match.numPlayers) : 0
     const dataPlayer = data && data.winnerBracket ? data.winnerBracket.Winner : {}
     const keyWinner = Object.keys(dataPlayer)
     let g = []
@@ -106,6 +109,7 @@ const Bracket = ({
             indexPlayer++
             arr[i].push(j)
             if (!playerInfo.p.includes(-1)) {
+              round1Lower.push(indexPlayer)
               g.push(
                 GBracket({
                   nameA,
@@ -149,6 +153,9 @@ const Bracket = ({
             let hasil = data[k]+adder
             hasil = hasil%2===1 ? hasil+1 : hasil
             arr[i+1].push(hasil)
+            if (i+1 === 1) {
+              round2Lower.push(indexPlayer)
+            }
             g.push(
               GBracket({
                 nameA,
@@ -174,7 +181,7 @@ const Bracket = ({
 const Connector = ({
     data
 }) => {
-    console.log('Data Connector ', data)
+    // console.log('Data Connector ', data)
     const maxRound = data && data.match ? Number(data.match.p) : 0
     const player = Math.pow(2,maxRound)
     const byePlayer = data && data.match ? Number(player - data.match.numPlayers) : 0
@@ -297,43 +304,163 @@ const Connector = ({
 const BracketLower = ({
     data
 }) => {
+  // console.log('r1 r2', round1Lower, round2Lower)
     const maxRound = data && data.match ? Number(data.match.p) : 0
     const player = Math.pow(2,maxRound)
-    const byePlayer = data && data.match ? Number(player - data.match.numPlayers) : 0
+    // const byePlayer = data && data.match ? Number(player - data.match.numPlayers) : 0
+    const p = data && data.match ? Number(data.match.p) : 0
     const dataPlayer = data && data.winnerBracket ? data.winnerBracket.Loser : {}
     const keyWinner = Object.keys(dataPlayer)
     let g = []
     let X = 244
     let Y = player <= 8 ? 54 : 54
-    console.log('Lower jalan', dataPlayer)
+    // console.log('Lower jalan', keyWinner.length)
     let arr = []
-    let indexRound = 0
-    let isNewRound = false
+    arrConnector = []
+    let adjustHeighA = 0
+    let adjustHeighB = 1
+    // let checkMe = []
     for(let i=0; i< keyWinner.length; i++){
       const playerPerRound = dataPlayer[keyWinner[i]]
-      if (i !== 0 && dataPlayer[keyWinner[i-1]].length !== playerPerRound.length) {
-        indexRound++
-        isNewRound = true
-      }
-      for(var j = 0, length2 = playerPerRound.length; j < length2; j++){
-        let nameA,nameB
-        const playerInfo = playerPerRound[j]
-        nameA = playerInfo.pName[0] || playerInfo.p[0] || ''
-        nameB = playerInfo.pName[1] || playerInfo.p[1] || ''
-        const adder = isNewRound ? indexRound*27 : 0
-        g.push(
-          GBracket({
-            nameA,
-            nameB,
-            x: (i*X),
-            y: (j*Y)+adder,
-            match: j+1,
-            index: `${i}${j}`
-          })
-        )
-      console.log('DPR', i, playerInfo)
+
+      if (i%2 === 0) {
+        if (i===0) {
+          arr[i]=[]
+          arrConnector[i]=[]
+          arrConnector[i+1]=[]
+          let nameA,nameB
+          for(var j = 0, length2 = playerPerRound.length; j < length2; j++){
+            const playerInfo = playerPerRound[j]
+            // const playerInfoMirror = dataPlayer[keyWinner[i+1]][j]
+            nameA = playerInfo.pName[0] || playerInfo.p[0] || ''
+            nameB = playerInfo.pName[1] || playerInfo.p[1] || ''
+            // console.log('playerI', playerInfoMirror, j, j+1)
+            console.log('J', j, j+4,j+(2*4), j+(3*4))
+
+          arr[i].push(j*Y)
+
+          // first lower
+          // rumus jika round 1 > round 2 upper
+          // 
+          // round1Lower = round1Upper - round2Upper and round2Lower = round2Upper
+          // 
+          // else round1Lower = round1Upper and round2Lower = round2upper / 2
+          let adjust = data.match.numPlayers %2 === 0? 0:27
+              // console.log('roun1', round1Lower, round2Lower)
+          if (round1Lower.length <= round2Lower.length) {
+            if (playerInfo.p.includes(0)) {
+              arrConnector[i].push({y:j*Y, x:i*X})
+              g.push(
+                GBracket({
+                  nameA: 'roun1',
+                  nameB,
+                  x: (i*X),
+                  y: (j*Y),
+                  match: j+1,
+                  index: `${i}${j}`
+                })
+              )
+            }
+          } else {
+            console.log('roun1', round1Lower, j)
+            if ((round1Lower.includes((j+1)*2) && round1Lower.includes(((j+1)*2)-1)) || data.match.numPlayers ===  player) {
+            console.log('else', j, (j+1)*2,(j+1)*2-1 )
+            // const specialAdjust = 4 * 27
+            arrConnector[i].push({y: ((j+1)*2-2)*27, x: i*X })
+              g.push(
+                GBracket({
+                  nameA: 'round1 '+(j+1)*4+1,
+                  nameB,
+                  x: (i*X),
+                  y: ((j+1)*2-2)*27,
+                  match: j+1,
+                  index: `${i}${j}`
+                })
+              )
+            }
+          }
+          if (j%2===0 || round1Lower.length > round2Lower.length) {
+            console.log('roun2', round2Lower.length, round1Lower.length)
+            if (round2Lower.length > round1Lower.length) {
+              console.log('masuk special case')
+              adjust = 27
+            }
+            arrConnector[i+1].push({ y: (j*Y)+adjust, x: (i+1)*X })
+            g.push(
+              GBracket({
+                nameA:'round2',
+                nameB,
+                x: ((i+1)*X),
+                y: (j*Y)+adjust,
+                match: j+1,
+                index: `${i+1}${j}`
+              })
+            )
+          }
+          }
+        }
+        const dataRound = arr[i]
+        if (dataRound && dataRound.length && i < p) {
+          arr[i+2] = []
+          arrConnector[i+2]=[]
+          arrConnector[i+3]=[]
+          for(var k = 0, length3 = dataRound.length; k < length3; k++){
+            if (k%2 === 0) {
+
+              const hasil = dataRound[k] + dataRound[k+1]
+              let nameA, nameB
+              arr[i+2].push(hasil/2)
+              // first lower
+                  arrConnector[i+2].push({y: hasil/2, x: (i+2)*X })
+                  g.push(
+                    GBracket({
+                      nameA: 'first',
+                      nameB: adjustHeighB,
+                      x: ((i+2)*X),
+                      y: (hasil/2),
+                      match: j+1,
+                      index: `${i}${hasil/2}`
+                    })
+                  )
+                // mirror lower
+                // of maxPlayer 32 mirror /2
+                // if (true) {}
+                if (player > 16) {
+                  if (k%4===2) {
+                console.log('max player', player, k,i)
+                      arrConnector[i+3].push({y: (hasil/2)-((i+2)*27), x: (i+3)*X })
+                      g.push(
+                        GBracket({
+                          nameA: 'if'+adjustHeighA,
+                          nameB,
+                          x: ((i+3)*X),
+                          y: (hasil/2)-((i+2)*27),
+                          match: j+1,
+                          index: `${i+3}${hasil/2}`
+                        })
+                      )          
+                    }
+                } else {
+                  console.log('kok jalan')
+                  arrConnector[i+3].push({y: (hasil/2), x: (i+3)*X })
+                  g.push(
+                    GBracket({
+                      nameA: 'else'+adjustHeighA,
+                      nameB,
+                      x: ((i+3)*X),
+                      y: (hasil/2),
+                      match: j+1,
+                      index: `${i+3}${hasil/2}`
+                    })
+                  )          
+                }
+              // console.log('i lower', i+3, k, adjustHeighA)
+            }
+          }
+        }
       }
     }
+    console.log('arr Lower conector', arrConnector)
     return (
         <g>
             {g}
@@ -344,132 +471,72 @@ const BracketLower = ({
 const ConnectorLower = ({
     data
 }) => {
-    console.log('Data Connector ', data)
-    const maxRound = data && data.match ? Number(data.match.p) : 0
-    const player = Math.pow(2,maxRound)
-    const byePlayer = data && data.match ? Number(player - data.match.numPlayers) : 0
-    const dataPlayer = data && data.winnerBracket ? data.winnerBracket.Winner : {}
-    const keyWinner = Object.keys(dataPlayer)
-
-    let Y = 27
-
-    let c = []
-    let arrC = []
-    for(let r = 0, length2 = maxRound; r < length2; r++){
-      if (r===0) {
-        arrC[r] =[]
-        let indexPlayer = 0
-        for(let i=0; i< player; i++){
-          const underE = i=== player-1 && player === 8
-          if(player<=8) {
-            console.log('i', i)
-            if(i === 0 || underE){
-              i = underE? i+1 : i
-              const adder = 3
-              const a = ((i + adder)*Y)
-              const b = ((i+ 2 + adder)*Y)
-              arrC[r].push(a,b)
-              c.push(
-                GConnector({
-                  x: 0,
-                  y: a,
-                  index: `${a}${b}`,
-                  d: "M 228 1 L 236 1 L 236 54"
-                })
-              )
-              c.push(
-                GConnector({
-                  x: 0,
-                  y: b,
-                  index: `${b}${a}`,
-                  d: "M 228 53 L 236 53 L 236 1 L 244 1"
-                })
-              )
-            }
-          } else {
-            if (i === 0 || (i+1)%4 === 1){
-              const adder = 2
-              const a = ((i + adder)*Y)
-              const b = ((i+ 1 + adder)*Y)
-              arrC[r].push(a,b)
-            }
-          }
-          if (i%2===1) {
-            const adder = indexPlayer % 2 === 1 ? 1 : 2
-            const a = (indexPlayer*2+adder)*27
-            const b = ((i+ 1 + 2)*Y)-81
-
-            const playerInfo = dataPlayer[keyWinner[r]][indexPlayer]
-            if (!playerInfo.p.includes(-1) && playerInfo.id.m % 2 === 1) {
-              c.push(
-                GConnector({
-                  x: 0,
-                  y: a,
-                  index: `${a}${b}`,
-                  d: `M 228 1 L 236 1 L 236 27 L 244 27`
-                })
-              )
-            } if (!playerInfo.p.includes(-1) && playerInfo.id.m % 2 === 0) {
-              c.push(
-                GConnector({
-                  x: 0,
-                  y: a,
-                  index: `${b}${a}`,
-                  d: "M 228 26 L 236 26 L 236 1 L 244 1"
-                })
-              )
-            }
-            indexPlayer++
-          }
+  // d: "M 228 1 L 236 1 L 236 27 L 244 27" atas
+  // "M 228 26 L 236 26 L 236 1 L 244 1" bawah
+  // "M 228 26 L 260 26" datar
+  let g = []
+  console.log('arrConnectornya', arrConnector)
+  for(let i=0; i< arrConnector.length; i++){
+    const dataRound = arrConnector[i]
+    const nextDataRound = arrConnector[i+1] || {}
+    const nextDataRound2 = arrConnector[i+2] || {}
+    for(var k = 0, length3 = dataRound.length; k < length3; k++){
+      const position = dataRound[k]
+      const nextPosition = dataRound[k+1] || {}
+      console.log('position =', position.y, nextPosition.y, k)
+      let connector = "M 228 26 L 260 26"
+      const checkGenap = nextDataRound2.length === dataRound.length
+      if (nextDataRound.length !== dataRound.length) {
+        if (nextPosition.y - position.y >= 54 || dataRound.length === 1) {
+          // bawah
+          connector = `M 228 ${26} L 236 ${26} L 236 ${54} L 244 ${54}`
+        }
+        if (!nextPosition.y && dataRound.length > 1) {
+          // atas
+          connector = `M 228 ${26} L 236 ${26} L 236 ${1} L 244 ${1}`
+        }
+        if (dataRound.length % 2 === 0 && k%2===1) {
+          // bawah
+          connector = `M 228 ${26} L 236 ${26} L 236 ${1} L 244 ${1}`
+        }
+        if (checkGenap) {
+          console.log('msa sih?', nextDataRound2.length, dataRound.length)
+          connector = "M 228 26 L 260 26"
         }
       }
-      if (r+2 < maxRound) {
-        if (arrC[r].length) {
-          arrC[r+1] = []
-          for(var i = 0, length3 = arrC[r].length/2; i < length3; i++){
-            const data = arrC[r]
-            const hasil = (data[i]*2)-Y
-            const heighAdjust = player <= 8 ? 4 : 2
-            const pathHasil = Math.pow(2, r) * (heighAdjust*Y)
-            if (i%2===0) {
-              arrC[r+1].push(hasil)
-              c.push(
-                GConnector({
-                  x: (r+1)*244,
-                  y: hasil,
-                  index: `${(r+1)*244}${hasil}`,
-                  d: `M 228 1 L 236 1 L 236 ${pathHasil} L 244 ${pathHasil}`
-                })
-              )
-            }
-            if (i%2===1) {
-              arrC[r+1].push(hasil)
-              c.push(
-                GConnector({
-                  x: (r+1)*244,
-                  y: hasil,
-                  index: `${(r+1)*244}${hasil}`,
-                  d: `M 228 ${pathHasil-1} L 236 ${pathHasil-1} L 236 1 L 244 1`
-                })
-              )
-            }
-          }
-        }
+
+      if (i+2 < arrConnector.length) {
+        g.push(
+          GConnector({
+            x: position.x,
+            y: position.y,
+            index: `${position.x}${position.y}`,
+            d: connector
+          })
+        )
       }
     }
-    return (
-        <g>
-            {c}
-        </g>
-    )
   }
+  return (
+      <g>
+          {g}
+      </g>
+  )
+}
 
 
 class Test extends React.PureComponent {
   render() {
-    const { data } = this.props
+    const {
+      data
+    } = this.props
+    round1Lower = []
+    round2Lower = []
+    arrConnector = []
     const round = data && data.match ? Number(data.match.p) : 0
     const player = Math.pow(2,round)
+    const roundLower = data && data.match ? Number(data.match.pLower) : 0
+    const playerLower = player/2
     const height = player <= 8 ? 54 : (54*0.55)
     // const round = Math.log2(player)
     console.log('DATAAAAAAA ', data)
@@ -481,7 +548,7 @@ class Test extends React.PureComponent {
             <Bracket data={data} />
           </g>
         </svg>
-        <svg className="bracket-svg" width={round*244} height={player*parseInt(height)} viewBox={`0 0 ${round*244} ${player*parseInt(height)}`}>
+        <svg className="bracket-svg" width={roundLower*244} height={player*parseInt(height)} viewBox={`0 0 ${roundLower*244} ${playerLower*parseInt(height)}`}>
           <g className="parent">
             <BracketLower data={data} />
             <ConnectorLower data={data} />
