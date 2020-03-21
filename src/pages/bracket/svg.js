@@ -198,9 +198,9 @@ const Connector = ({
         let indexPlayer = 0
         for(let i=0; i< player; i++){
           const underE = i=== player-1 && player === 8
-          if(player<=8) {
+          if(player <= 8) {
             console.log('i', i)
-            if(i === 0 || underE){
+            if(i === 0 || underE) {
               i = underE? i+1 : i
               const adder = 3
               const a = ((i + adder)*Y)
@@ -473,7 +473,7 @@ const ConnectorLower = ({
 }) => {
   // d: "M 228 1 L 236 1 L 236 27 L 244 27" atas
   // "M 228 26 L 236 26 L 236 1 L 244 1" bawah
-  // "M 228 26 L 260 26" datar
+  // "M 228 26 L 248 26" datar
   let g = []
   console.log('arrConnectornya', arrConnector)
   for(let i=0; i< arrConnector.length; i++){
@@ -484,7 +484,7 @@ const ConnectorLower = ({
       const position = dataRound[k]
       const nextPosition = dataRound[k+1] || {}
       console.log('position =', position.y, nextPosition.y, k)
-      let connector = "M 228 26 L 260 26"
+      let connector = "M 228 26 L 248 26"
       const checkGenap = nextDataRound2.length === dataRound.length
       if (nextDataRound.length !== dataRound.length) {
         if (nextPosition.y - position.y >= 54 || dataRound.length === 1) {
@@ -501,7 +501,7 @@ const ConnectorLower = ({
         }
         if (checkGenap) {
           console.log('msa sih?', nextDataRound2.length, dataRound.length)
-          connector = "M 228 26 L 260 26"
+          connector = "M 228 26 L 248 26"
         }
       }
 

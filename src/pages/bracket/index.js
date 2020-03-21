@@ -1546,7 +1546,7 @@ class Test extends React.PureComponent {
     const res = await request({
       method: 'post',  
       fullUrl: true,
-      url: 'http://localhost:3000/tournament/bracket/double',
+      url: 'http://192.168.1.26:3099/tournament/bracket/double',
       auth: false,
       data: {
         player: Number(this.state.inputPlayer),
