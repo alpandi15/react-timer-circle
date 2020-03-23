@@ -105,11 +105,12 @@ class Test extends React.PureComponent {
     const { player, round } = this.state
     let loop = 0;
     for (let r = 0; r < round; r++) {
-      for(let i = 0; i < dataBracket[keys[r]].length; i++) {
+      for(let i = r; i < dataBracket[keys[r]].length + r; i++) {
+        let rumus = Y*((2-r)*i)
         g.push(
           GBracket({
             x: (r*X),
-            y: Y*(2*i),
+            y: rumus,
             match: i+1,
             index: i*r
           })

@@ -473,7 +473,7 @@ const ConnectorLower = ({
 }) => {
   // d: "M 228 1 L 236 1 L 236 27 L 244 27" atas
   // "M 228 26 L 236 26 L 236 1 L 244 1" bawah
-  // "M 228 26 L 260 26" datar
+  // "M 228 26 L 248 26" datar
   let g = []
   let XL = 27
   console.log('arrConnectornya', arrConnector)

@@ -12,22 +12,24 @@ import PaginationUrl from '../pages/pagination_url'
 import Select from '../pages/select'
 import Bracket from '../pages/bracket'
 import Bracket2 from '../pages/bracket/test2'
+import Form from '../pages/form'
 
 const router = () => {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/countdown" component={Countdown} />
-        <Route exact path="/countdown-test" component={Countdown2} />
-        <Route exact path="/countdown-test2" component={CountdownTest2} />
-        <Route exact path="/paginate" component={Paginate} />
-        <Route exact path="/paginate2" component={Paginate2} />
-        <Route exact path="/team" component={PaginationApi} />
-        <Route exact path="/url_paginate*" component={PaginationUrl} />
-        <Route exact path="/select" component={Select} />
-        <Route exact path="/bracket" component={Bracket} />
-        <Route exact path="/bracket2" component={Bracket2} />
+        <Route path="/countdown" component={Countdown} />
+        <Route path="/countdown-test" component={Countdown2} />
+        <Route path="/countdown-test2" component={CountdownTest2} />
+        <Route path="/paginate" component={Paginate} />
+        <Route path="/paginate2" component={Paginate2} />
+        <Route path="/team" component={PaginationApi} />
+        <Route path="/url_paginate*" component={PaginationUrl} />
+        <Route path="/select" component={Select} />
+        <Route path="/bracket" component={Bracket} />
+        <Route path="/bracket2" component={Bracket2} />
+        <Route path="/form" component={Form} />
       </Switch>
     </BrowserRouter>
   )
