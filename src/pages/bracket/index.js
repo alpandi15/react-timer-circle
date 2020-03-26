@@ -2,7 +2,7 @@ import React from 'react'
 import './style.css'
 import SVG from './svg'
 import { request } from '../../services/request'
-import data from './data.json'
+// import data from './data.json'
 
 class Test extends React.PureComponent {
   constructor (props) {
@@ -10,7 +10,7 @@ class Test extends React.PureComponent {
     this.state = {
       inputPlayer: 0,
       player: 0,
-      data : data,
+      data : [],
       success: false
     }
   }
@@ -22,7 +22,7 @@ class Test extends React.PureComponent {
     const res = await request({
       method: 'post',  
       fullUrl: true,
-      url: 'http://192.168.1.26:3099/tournament/bracket/double',
+      url: 'http://localhost:3000/tournament/bracket/double',
       auth: false,
       data: {
         player: Number(this.state.inputPlayer),
@@ -32,7 +32,7 @@ class Test extends React.PureComponent {
 
     if (res.success) {
       this.setState({
-        data: res.data
+        data: JSON.parse(res.data)
       })
     }
 

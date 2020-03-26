@@ -468,6 +468,66 @@ const BracketLower = ({
   )
 }
 
+const generatePola = (data) => {
+  let arrPola = []
+  const dataPlayer = data && data.winnerBracket ? data.winnerBracket.Loser : {}
+  const keyWinner = Object.keys(dataPlayer)
+  for (let i = 0; i < keyWinner.length; i++) {
+    arrPola[i] = []
+    for (let j = 0; j < dataPlayer[keyWinner[i]].length; j++) {
+      if (!dataPlayer[keyWinner[i]][j].p.includes(-1)) {
+        arrPola[i].push({
+          roundIndex: i + 1,
+          matchIndex: dataPlayer[keyWinner[i]][j].id.m,
+          data: dataPlayer[keyWinner[i]][j]
+        })
+      }
+    }
+  }
+
+  const hasil = arrPola.filter((val) => {
+    return val.length !== 0
+  })
+
+  return hasil
+}
+
+const BracketLower2 = ({
+  data
+}) => {
+  const dataPola = generatePola(data)
+  console.log('hasil ', dataPola)
+
+  let X = 244
+  let Y = 54
+  let braketData = []
+  for (let i = 0, length = dataPola.length; i < length; i++) {
+    // if (i === 3) {
+      console.log('HSL ',i , dataPola[i].length)
+      for (let j = 0; j < dataPola[i].length; j++) {
+        braketData.push(
+          GBracket({
+            nameA: `Match ${j}`,
+            nameB: `Round ${i}`,
+            x: (i * X),
+            y: (dataPola[i][j].matchIndex * Y),
+            match: i + 1,
+            index: `${i}${i}`
+          })
+        )
+      }
+    // }
+  }
+
+  console.log('hasil braket ', braketData)
+
+  return (
+    <g>
+      {braketData}
+    </g>
+  )
+}
+
 const ConnectorLower = ({
   data
 }) => {
@@ -547,16 +607,18 @@ class Test extends React.PureComponent {
     console.log('DATAAAAAAA ', data)
     return (
       <div>
-        <svg className="bracket-svg" width={round * 244} height={player * parseInt(height)} viewBox={`0 0 ${round * 244} ${player * parseInt(height)}`}>
+        {/* <svg className="bracket-svg" width={round * 244} height={player * parseInt(height)} viewBox={`0 0 ${round * 244} ${player * parseInt(height)}`}>
           <g className="parent">
             <Connector data={data} />
             <Bracket data={data} />
           </g>
-        </svg>
-        <svg className="bracket-svg" width={roundLower * 244} height={player * parseInt(height)} viewBox={`0 0 ${roundLower * 244} ${playerLower * parseInt(height)}`}>
+        </svg> */}
+        <br />
+        <svg className="bracket-svg" width={(roundLower * 244) + 244} height={player * parseInt(height)} viewBox={`0 0 ${(roundLower * 244)+244} ${playerLower * parseInt(height)}`}>
           <g className="parent">
-            <BracketLower data={data} />
-            <ConnectorLower data={data} />
+            {data && <BracketLower2 data={data} /> }
+            {/* <BracketLower data={data} /> */}
+            {/* <ConnectorLower data={data} /> */}
           </g>
         </svg>
       </div>
