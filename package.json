@@ -13,7 +13,7 @@
     "bootstrap": "^4.4.1",
     "cors": "^2.8.5",
     "countries-api": "^2.0.2",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "history": "^4.10.1",
     "i18next": "^17.0.14",
     "i18next-browser-languagedetector": "^3.0.3",
